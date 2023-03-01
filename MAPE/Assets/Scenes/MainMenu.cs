@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsPanel;
+    public GameObject startPanel;
+    public GameObject musicPanel;
+    public GameObject controlsPanel;
+    public GameObject creditsPanel;
+    public GameObject onlinePanel;
+    
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -25,5 +31,55 @@ public class MainMenu : MonoBehaviour
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
+    }
+
+    public void OpenStart()
+    {
+        startPanel.SetActive(true);
+    }
+    
+    public void CloseStart()
+    {
+        startPanel.SetActive(false);
+    }
+
+    public void OpenMusic()
+    {
+        musicPanel.SetActive(true);
+    }
+    
+    public void CloseMusic()
+    {
+        musicPanel.SetActive(false);
+    }
+
+    public void OpenControls()
+    {
+        controlsPanel.SetActive(true);
+    }
+    
+    public void CloseControls()
+    {
+        controlsPanel.SetActive(false);
+    }
+
+    public void OpenCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+    
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
+    }
+
+    public void OpenOnline()
+    {
+        onlinePanel.SetActive(true);
+    }
+    
+    public void CloseOnline()
+    {
+        onlinePanel.SetActive(false);
     }
 }
