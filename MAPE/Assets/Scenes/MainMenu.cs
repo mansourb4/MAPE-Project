@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public GameObject controlsPanel;
     public GameObject creditsPanel;
     public GameObject onlinePanel;
+    public GameObject localPanel;
     
     public void StartGame()
     {
@@ -81,5 +82,15 @@ public class MainMenu : MonoBehaviour
     public void CloseOnline()
     {
         onlinePanel.SetActive(false);
+    }
+
+    public void OpenLocal()
+    {
+        localPanel.SetActive(true);
+    }
+    
+    public void CloseLocal()
+    {
+        localPanel.SetActive(false);
     }
 }
