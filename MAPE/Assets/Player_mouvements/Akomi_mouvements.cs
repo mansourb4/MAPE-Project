@@ -12,6 +12,7 @@ public class Akomi_mouvements : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        direction = Vector2.zero;
     }
 
     // Update is called once per frame
