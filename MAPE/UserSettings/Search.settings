@@ -7,19 +7,19 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.DA949528" = "Inspector"
+	"last_search.DA949528" = "inspect"
 	"OpenInspectorPreview.DA949528" = "0"
 	"currentGroup.DA949528" = "all"
 }
 providers = {
-	adb = {
-		active = false
-		priority = 2500
-		defaultAction = null
-	}
-	asset = {
+	find = {
 		active = true
 		priority = 25
+		defaultAction = null
+	}
+	performance = {
+		active = false
+		priority = 100
 		defaultAction = null
 	}
 	store = {
@@ -27,7 +27,22 @@ providers = {
 		priority = 100
 		defaultAction = null
 	}
-	find = {
+	packages = {
+		active = true
+		priority = 90
+		defaultAction = null
+	}
+	adb = {
+		active = false
+		priority = 2500
+		defaultAction = null
+	}
+	scene = {
+		active = true
+		priority = 50
+		defaultAction = null
+	}
+	asset = {
 		active = true
 		priority = 25
 		defaultAction = null
@@ -37,26 +52,10 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
-	packages = {
-		active = true
-		priority = 90
-		defaultAction = null
-	}
-	performance = {
-		active = false
-		priority = 100
-		defaultAction = null
-	}
-	scene = {
-		active = true
-		priority = 50
-		defaultAction = null
-	}
 }
 objectSelectors = {
 }
 recentSearches = [
-	"G"
 ]
 searchItemFavorites = [
 ]
