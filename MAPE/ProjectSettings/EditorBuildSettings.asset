@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: eb4e469d006b64c5193d29fd1152a082
   - enabled: 1
-    path: Assets/Scenes/Level 01.unity
+    path: Assets/Scenes/Akomi Scene.unity
+    guid: 80d3c0045f2da4ebfbe220d8b8d4cc82
+  - enabled: 1
+    path: Assets/Scenes/Gentaro Scene.unity
+    guid: 9c486fe36229a4020ac26dbea62bb1b2
+  - enabled: 1
+    path: Assets/Scenes/Heira Scene.unity
+    guid: 1253e7447d5e844b6b17f9b917ee3cb7
+  - enabled: 1
+    path: Assets/Scenes/Kettewen Scene.unity
     guid: ce1016e847e144878b9e99069a546a15
   m_configObjects: {}
