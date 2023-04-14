@@ -15,6 +15,11 @@ public class PlayerCombatRight : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Attack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N)) // lettre a changer 
+        {
+            Special_Attack();
         } 
     }
 
@@ -28,5 +33,11 @@ public class PlayerCombatRight : MonoBehaviour
         {
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
+    }
+
+    void Special_Attack()
+    {
+        
+        animator.SetTrigger("Spe");
     }
 }

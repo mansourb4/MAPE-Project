@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCombatLeft : MonoBehaviour
@@ -15,7 +16,12 @@ public class PlayerCombatLeft : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Attack();
-        } 
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Special_Attack();
+        }
     }
 
     void Attack()
@@ -28,5 +34,10 @@ public class PlayerCombatLeft : MonoBehaviour
         {
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
+    }
+
+    void Special_Attack()
+    {
+        animator.SetTrigger("Spe_left");
     }
 }
