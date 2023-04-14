@@ -19,6 +19,8 @@ public class Gentaro_mouvements : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public Transform attackPoint;
+    public float attackRate = 1f;
+    float nextAttackTime = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +52,7 @@ public class Gentaro_mouvements : MonoBehaviour
     void TakeInput()
     {
         direction = Vector2.zero;
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.Space))
         {
            direction += Vector2.up;
         }
@@ -70,15 +72,31 @@ public class Gentaro_mouvements : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.N))
         {
-            SpecialAttack();
+            if(Time.time >= nextAttackTime)
+                {
+                     SpecialAttack();
+                     nextAttackTime = Time.time + 1f / attackRate;
+                }
+            
         }
         else if (Input.GetKey(KeyCode.B))
         {
-            Attack_2();
+            if(Time.time >= nextAttackTime)
+                {
+                     Attack_2();
+                     nextAttackTime = Time.time + 1f / attackRate;
+                }
+            
+            
         }
         else if (Input.GetKey(KeyCode.V))
         {
-            Attack_3();
+             if(Time.time >= nextAttackTime)
+                {
+                     Attack_3();
+                     nextAttackTime = Time.time + 1f / attackRate;
+                }
+            
         }
 	}
 
@@ -119,6 +137,7 @@ public class Gentaro_mouvements : MonoBehaviour
     
             foreach (Collider2D enemy in hitEnemies)
             {
+                enemy.GetComponent<Enemies>().TakeDamage(2);
                 Debug.Log("Gentaro a attaqué " + enemy.name);
             }
         }
@@ -137,6 +156,7 @@ public class Gentaro_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            enemy.GetComponent<Enemies>().TakeDamage(2);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
 
@@ -157,6 +177,7 @@ public class Gentaro_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            enemy.GetComponent<Enemies>().TakeDamage(2);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
     }
@@ -176,7 +197,17 @@ public class Gentaro_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            enemy.GetComponent<Enemies>().TakeDamage(2);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
+    }
+    void  OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        
+        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
     }
 }

@@ -51,7 +51,7 @@ public class Heira_mouvements : MonoBehaviour
     void TakeInput()
     {
         direction = Vector2.zero;
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.Space))
         {
            direction += Vector2.up;
         }

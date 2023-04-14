@@ -19,7 +19,8 @@ public class Akomi_mouvements : MonoBehaviour
     public LayerMask enemyLayers;
     public Transform attackPointLeft;
     public Transform attackPointRight;
-
+    public float attackRate = 0.5f;
+    float nextAttackTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class Akomi_mouvements : MonoBehaviour
     
     void Update()
     {
+        
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         TakeInput();
         Move();
@@ -50,7 +52,7 @@ public class Akomi_mouvements : MonoBehaviour
     void TakeInput()
     {
         direction = Vector2.zero;
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.Space))
         {
            direction += Vector2.up;
         }
@@ -71,15 +73,30 @@ public class Akomi_mouvements : MonoBehaviour
         
         else if (Input.GetKey(KeyCode.B))
         {
-            Attack2();
+            if(Time.time >= nextAttackTime)
+                {
+                     Attack2();
+                     nextAttackTime = Time.time + 1f / attackRate;
+                }
+            
         }
         else if (Input.GetKey(KeyCode.V))
         {
-            Attack3();
+            if(Time.time >= nextAttackTime)
+                {
+                     Attack3();
+                     nextAttackTime = Time.time + 1f / attackRate;
+                }
+            
         }
         else if (Input.GetKey(KeyCode.N))
         {
-            Special_Attack();
+            if(Time.time >= nextAttackTime)
+                {
+                     Special_Attack();
+                     nextAttackTime = Time.time + 1f / attackRate;
+                }
+            
         }
 	}
 
@@ -120,6 +137,7 @@ public class Akomi_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            enemy.GetComponent<Enemies>().TakeDamage(2);
             Debug.Log("Akomi a attaqué " + enemy.name);
         }
     }
@@ -139,6 +157,7 @@ public class Akomi_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            enemy.GetComponent<Enemies>().TakeDamage(4);
             Debug.Log("Akomi a attaqué " + enemy.name);
         }
     }
@@ -158,7 +177,17 @@ public class Akomi_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            enemy.GetComponent<Enemies>().TakeDamage(8);
             Debug.Log("Akomi a attaqué " + enemy.name);
         }
+    }
+    void  OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        
+        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
     }
 }
