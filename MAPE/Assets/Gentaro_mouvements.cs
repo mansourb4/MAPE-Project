@@ -137,7 +137,7 @@ public class Gentaro_mouvements : MonoBehaviour
     
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Enemies>().TakeDamage(2);
+                enemy.GetComponent<Enemies>().TakeDamage(50);
                 Debug.Log("Gentaro a attaqué " + enemy.name);
             }
         }
@@ -156,7 +156,7 @@ public class Gentaro_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(2);
+            enemy.GetComponent<Enemies>().TakeDamage(50);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
 
@@ -210,4 +210,5 @@ public class Gentaro_mouvements : MonoBehaviour
         
         Gizmos.DrawWireSphere(attackPoint.position,attackRange);
     }
+    
 }
