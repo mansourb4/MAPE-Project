@@ -71,7 +71,7 @@ public class Akomi_mouvements : MonoBehaviour
             attackPoint = attackPointRight;
         }
         
-        else if (Input.GetKey(KeyCode.B))
+        else if (Input.GetKey(KeyCode.F))
         {
             if(Time.time >= nextAttackTime)
                 {
@@ -80,7 +80,7 @@ public class Akomi_mouvements : MonoBehaviour
                 }
             
         }
-        else if (Input.GetKey(KeyCode.V))
+        else if (Input.GetKey(KeyCode.B))
         {
             if(Time.time >= nextAttackTime)
                 {
@@ -137,7 +137,7 @@ public class Akomi_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(2);
+            enemy.GetComponent<Enemies>().TakeDamage(30);
             Debug.Log("Akomi a attaqué " + enemy.name);
         }
     }
@@ -157,7 +157,7 @@ public class Akomi_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(4);
+            enemy.GetComponent<Enemies>().TakeDamage(50);
             Debug.Log("Akomi a attaqué " + enemy.name);
         }
     }
@@ -177,17 +177,9 @@ public class Akomi_mouvements : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(8);
+            enemy.GetComponent<Enemies>().TakeDamage(70);
             Debug.Log("Akomi a attaqué " + enemy.name);
         }
     }
-    void  OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-        {
-            return;
-        }
-        
-        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
-    }
+   
 }

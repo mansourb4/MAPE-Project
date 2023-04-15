@@ -70,15 +70,17 @@ public class Gentaro_mouvements : MonoBehaviour
             IsTurnedRight = true;
             attackPoint = attackPointRight;
         }
-        else if (Input.GetKey(KeyCode.N))
+         else if (Input.GetKey(KeyCode.F))
         {
             if(Time.time >= nextAttackTime)
                 {
-                     SpecialAttack();
+                     Attack();
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
             
+            
         }
+        
         else if (Input.GetKey(KeyCode.B))
         {
             if(Time.time >= nextAttackTime)
@@ -127,19 +129,25 @@ public class Gentaro_mouvements : MonoBehaviour
             if (IsTurnedRight)
             {
                 animator.SetTrigger("Attack_1_right");
+                attackPoint = attackPointRight;
             }
             else
             {
                 animator.SetTrigger("Attack_1_left");
+                attackPoint = attackPointLeft;
             }
+            attackPoint.gameObject.SetActive(true);
+            
             
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
     
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Enemies>().TakeDamage(50);
+                enemy.GetComponent<Enemies>().TakeDamage(20);
                 Debug.Log("Gentaro a attaqué " + enemy.name);
             }
+        
+             attackPoint.gameObject.SetActive(false);
         }
     
     void SpecialAttack()
@@ -147,18 +155,24 @@ public class Gentaro_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Spe");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Spe_left");
+            attackPoint = attackPointLeft;
         }
+         attackPoint.gameObject.SetActive(true);
+         attackPoint.GetComponent<Collider2D>().enabled = false;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(50);
+            enemy.GetComponent<Enemies>().TakeDamage(0);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
+        attackPoint.GetComponent<Collider2D>().enabled = true;
+         attackPoint.gameObject.SetActive(false);
 
     }
     
@@ -167,19 +181,24 @@ public class Gentaro_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Attack_2_right");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Attack_2_left");
+            attackPoint = attackPointLeft;
         }
-        
+         attackPoint.gameObject.SetActive(true);
+         attackPoint.GetComponent<Collider2D>().enabled = false;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(2);
+            enemy.GetComponent<Enemies>().TakeDamage(40);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
+        attackPoint.GetComponent<Collider2D>().enabled = true;
+         attackPoint.gameObject.SetActive(false);
     }
     
     void Attack_3()
@@ -187,28 +206,26 @@ public class Gentaro_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Attack_3_right");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Attack_3_left");
+            attackPoint = attackPointLeft;
         }
+         attackPoint.gameObject.SetActive(true);
+         attackPoint.GetComponent<Collider2D>().enabled = false;
         
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemies>().TakeDamage(2);
+            enemy.GetComponent<Enemies>().TakeDamage(50);
             Debug.Log("Gentaro a attaqué " + enemy.name);
         }
+        attackPoint.GetComponent<Collider2D>().enabled = true;
+         attackPoint.gameObject.SetActive(false);
     }
-    void  OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-        {
-            return;
-        }
-        
-        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
-    }
+    
     
 }
