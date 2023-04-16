@@ -16,9 +16,9 @@ public class Gentaro_mouvements : MonoBehaviour
     private bool IsTurnedRight = true;
     public Transform attackPointRight;
     public Transform attackPointLeft;
-    public float attackRange = 0.5f;
+    //public float attackRange = 0.5f;
     public LayerMask enemyLayers;
-    public Transform attackPoint;
+    //public Transform attackPoint;
     public float attackRate = 1f;
     float nextAttackTime = 0f;
 
