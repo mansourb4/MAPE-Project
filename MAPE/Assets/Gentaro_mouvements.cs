@@ -16,11 +16,13 @@ public class Gentaro_mouvements : MonoBehaviour
     private bool IsTurnedRight = true;
     public Transform attackPointRight;
     public Transform attackPointLeft;
-    //public float attackRange = 0.5f;
+    public float attackRange = 0.5f;
     public LayerMask enemyLayers;
-    //public Transform attackPoint;
+    public Transform attackPoint;
     public float attackRate = 1f;
     float nextAttackTime = 0f;
+    public bool isAttacking = false;
+    public int damage = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -74,30 +76,45 @@ public class Gentaro_mouvements : MonoBehaviour
         {
             if(Time.time >= nextAttackTime)
                 {
+                attackPoint.gameObject.SetActive(true);
+                damage = 10;
                      Attack();
+                isAttacking = true;
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
             
             
         }
         
         else if (Input.GetKey(KeyCode.B))
         {
+            damage = 25;
             if(Time.time >= nextAttackTime)
                 {
-                     Attack_2();
+                attackPoint.gameObject.SetActive(true);
+                Attack_2();
+                isAttacking = true;
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
             
             
         }
         else if (Input.GetKey(KeyCode.V))
         {
+            damage = 40;
              if(Time.time >= nextAttackTime)
                 {
+                attackPoint.gameObject.SetActive(true);
+                isAttacking = true;
                      Attack_3();
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
             
         }
 	}
@@ -123,10 +140,10 @@ public class Gentaro_mouvements : MonoBehaviour
         }
         
     }
-    
     void Attack()
         {
-            if (IsTurnedRight)
+        
+        if (IsTurnedRight)
             {
                 animator.SetTrigger("Attack_1_right");
                 attackPoint = attackPointRight;
@@ -136,19 +153,9 @@ public class Gentaro_mouvements : MonoBehaviour
                 animator.SetTrigger("Attack_1_left");
                 attackPoint = attackPointLeft;
             }
-            attackPoint.gameObject.SetActive(true);
-            
-            
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-    
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                enemy.GetComponent<Enemies>().TakeDamage(20);
-                Debug.Log("Gentaro a attaqué " + enemy.name);
-            }
-        
-             attackPoint.gameObject.SetActive(false);
+       
         }
+            
     
     void SpecialAttack()
     {
@@ -162,17 +169,7 @@ public class Gentaro_mouvements : MonoBehaviour
             animator.SetTrigger("Spe_left");
             attackPoint = attackPointLeft;
         }
-         attackPoint.gameObject.SetActive(true);
-         attackPoint.GetComponent<Collider2D>().enabled = false;
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Enemies>().TakeDamage(0);
-            Debug.Log("Gentaro a attaqué " + enemy.name);
-        }
-        attackPoint.GetComponent<Collider2D>().enabled = true;
-         attackPoint.gameObject.SetActive(false);
+         
 
     }
     
@@ -188,17 +185,9 @@ public class Gentaro_mouvements : MonoBehaviour
             animator.SetTrigger("Attack_2_left");
             attackPoint = attackPointLeft;
         }
-         attackPoint.gameObject.SetActive(true);
-         attackPoint.GetComponent<Collider2D>().enabled = false;
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Enemies>().TakeDamage(40);
-            Debug.Log("Gentaro a attaqué " + enemy.name);
-        }
-        attackPoint.GetComponent<Collider2D>().enabled = true;
-         attackPoint.gameObject.SetActive(false);
+        
+       
+       
     }
     
     void Attack_3()
@@ -213,19 +202,12 @@ public class Gentaro_mouvements : MonoBehaviour
             animator.SetTrigger("Attack_3_left");
             attackPoint = attackPointLeft;
         }
-         attackPoint.gameObject.SetActive(true);
-         attackPoint.GetComponent<Collider2D>().enabled = false;
-        
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+         
 
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Enemies>().TakeDamage(50);
-            Debug.Log("Gentaro a attaqué " + enemy.name);
-        }
-        attackPoint.GetComponent<Collider2D>().enabled = true;
-         attackPoint.gameObject.SetActive(false);
+        
     }
     
-    
+
+
+
 }

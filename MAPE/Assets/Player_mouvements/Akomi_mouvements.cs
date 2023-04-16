@@ -7,20 +7,22 @@ public class Akomi_mouvements : MonoBehaviour
     public float speed;
     private Vector2 direction;
     private Animator animator;
-    public float jumpSpeed = 30f; 
-	private Rigidbody2D player;
+    public float jumpSpeed = 30f;
+    private Rigidbody2D player;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
     private bool isTouchingGround;
     private bool IsTurnedRight = true;
-    public Transform attackPoint;
+    public Transform attackPointRight;
+    public Transform attackPointLeft;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
-    public Transform attackPointLeft;
-    public Transform attackPointRight;
-    public float attackRate = 0.5f;
+    public Transform attackPoint;
+    public float attackRate = 1f;
     float nextAttackTime = 0f;
+    public bool isAttacking = false;
+    public int damage = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,28 +77,40 @@ public class Akomi_mouvements : MonoBehaviour
         {
             if(Time.time >= nextAttackTime)
                 {
-                     Attack2();
-                     nextAttackTime = Time.time + 1f / attackRate;
+                attackPoint.gameObject.SetActive(true);
+                damage = 10;
+                Attack2();
+                isAttacking = true;
+                nextAttackTime = Time.time + 1f / attackRate;
                 }
-            
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
+
         }
         else if (Input.GetKey(KeyCode.B))
         {
             if(Time.time >= nextAttackTime)
                 {
-                     Attack3();
+                attackPoint.gameObject.SetActive(true);
+                damage = 10;
+                Attack3();
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
-            
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
         }
-        else if (Input.GetKey(KeyCode.N))
+        else if (Input.GetKey(KeyCode.V))
         {
             if(Time.time >= nextAttackTime)
                 {
-                     Special_Attack();
+                attackPoint.gameObject.SetActive(true);
+                damage = 10;
+                Special_Attack();
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
-            
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
+
         }
 	}
 
@@ -127,19 +141,15 @@ public class Akomi_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Attack_2_right");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Attack_2_left");
+            attackPoint = attackPointLeft;
         }
         
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Enemies>().TakeDamage(30);
-            Debug.Log("Akomi a attaqué " + enemy.name);
-        }
+       
     }
 
     void Attack3()
@@ -147,19 +157,15 @@ public class Akomi_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Attack_3_right");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Attack_3_left");
+            attackPoint = attackPointLeft;
         }
         
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Enemies>().TakeDamage(50);
-            Debug.Log("Akomi a attaqué " + enemy.name);
-        }
+       
     }
 
     void Special_Attack()
@@ -167,19 +173,15 @@ public class Akomi_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Spe");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Spe_left");
+            attackPoint = attackPointLeft;
         }
         
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Enemies>().TakeDamage(70);
-            Debug.Log("Akomi a attaqué " + enemy.name);
-        }
+      
     }
    
 }
