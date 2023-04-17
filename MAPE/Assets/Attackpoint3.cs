@@ -21,7 +21,7 @@ public class Attackpoint3 : MonoBehaviour
     {
 
         Debug.Log("attaquer");
-        enemyHealth.TakeDamage(10);
+        enemyHealth.TakeDamage(heira.damage);
 
     }
 }

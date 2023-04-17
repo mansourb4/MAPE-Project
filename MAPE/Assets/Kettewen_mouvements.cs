@@ -7,18 +7,28 @@ public class Kettewen_mouvements : MonoBehaviour
     public float speed;
     private Vector2 direction;
     private Animator animator;
-    public float jumpSpeed = 30f; 
-	private Rigidbody2D player;
+    public float jumpSpeed = 30f;
+    private Rigidbody2D player;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
     private bool isTouchingGround;
-    public bool IsTurnedRight = true;
+    private bool IsTurnedRight = true;
     public Transform attackPointRight;
     public Transform attackPointLeft;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public Transform attackPoint;
+    public float attackRate = 1f;
+    float nextAttackTime = 0f;
+    public bool isAttacking = false;
+    public int damage = 0;
+    
+    public bool CanMove { get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        }
+            }
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +45,13 @@ public class Kettewen_mouvements : MonoBehaviour
     {
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         TakeInput();
-        Move();
-        if(Input.GetButtonDown("Jump") && isTouchingGround)
+        if (CanMove)
+        {
+            Move();
+        }
+       
+        
+        if(Input.GetButtonDown("Jump") && isTouchingGround && CanMove)
         {
             float force = jumpSpeed;
             if(player.velocity.y < 0)
@@ -68,23 +83,45 @@ public class Kettewen_mouvements : MonoBehaviour
             IsTurnedRight = true;
             attackPoint = attackPointRight;
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.F))
         {
+            if (Time.time >= nextAttackTime)
+            {
+                attackPoint.gameObject.SetActive(true);
+                damage = 30;
             Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
         }
 
-        else if (Input.GetKeyDown(KeyCode.N)) // lettre a changer 
+        else if (Input.GetKeyDown(KeyCode.V)) // lettre a changer 
         {
+                if (Time.time >= nextAttackTime)
+                {
+                    attackPoint.gameObject.SetActive(true);
+                    damage = 70;
             SpecialAttack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
         }
         else if (Input.GetKeyDown(KeyCode.B)) // idem
         {
+                    if (Time.time >= nextAttackTime)
+                    {
+               
+                        attackPoint.gameObject.SetActive(true);
+                        damage = 40;
             Attack_2();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+            attackPoint.gameObject.SetActive(false);
+            isAttacking = false;
         }
-        else if (Input.GetKeyDown(KeyCode.V)) // idem
-        {
-            Attack_3();
-        }
+        
 	}
 
     void Move()
@@ -114,18 +151,15 @@ public class Kettewen_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Attack_1_right");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Attack_1_left");
+            attackPoint = attackPointLeft;
         }
         
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Kettewen a attaqué " + enemy.name);
-        }
+       
     }
 
     void SpecialAttack()
@@ -133,10 +167,12 @@ public class Kettewen_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Spe");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Spe_left");
+            attackPoint = attackPointLeft;
         }
 
     }
@@ -146,36 +182,18 @@ public class Kettewen_mouvements : MonoBehaviour
         if (IsTurnedRight)
         {
             animator.SetTrigger("Attack_2_right");
+            attackPoint = attackPointRight;
         }
         else
         {
             animator.SetTrigger("Attack_2_left");
+            attackPoint = attackPointLeft;
         }
         
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Kettewen a attaqué " + enemy.name);
-        }
-    }
-
-    void Attack_3()
-    {
-        if (IsTurnedRight)
-        {
-            animator.SetTrigger("Attack_3_right");
-        }
-        else
-        {
-            animator.SetTrigger("Attack_3_left");
-        }
         
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Kettewen a attaqué " + enemy.name);
-        }
     }
-}
+
+    
+        
+        
+    }

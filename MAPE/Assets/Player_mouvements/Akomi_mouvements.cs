@@ -23,6 +23,13 @@ public class Akomi_mouvements : MonoBehaviour
     float nextAttackTime = 0f;
     public bool isAttacking = false;
     public int damage = 0;
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +45,11 @@ public class Akomi_mouvements : MonoBehaviour
         
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         TakeInput();
-        Move();
-        if(Input.GetButtonDown("Jump") && isTouchingGround)
+        if(CanMove)
+        {
+            Move();
+        }
+        if (Input.GetButtonDown("Jump") && isTouchingGround && CanMove)
         {
             float force = jumpSpeed;
             if(player.velocity.y < 0)
@@ -78,8 +88,8 @@ public class Akomi_mouvements : MonoBehaviour
             if(Time.time >= nextAttackTime)
                 {
                 attackPoint.gameObject.SetActive(true);
-                damage = 10;
-                Attack2();
+                damage = 40;
+                Attack();
                 isAttacking = true;
                 nextAttackTime = Time.time + 1f / attackRate;
                 }
@@ -92,8 +102,8 @@ public class Akomi_mouvements : MonoBehaviour
             if(Time.time >= nextAttackTime)
                 {
                 attackPoint.gameObject.SetActive(true);
-                damage = 10;
-                Attack3();
+                damage = 35;
+                Attack2();
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
             attackPoint.gameObject.SetActive(false);
@@ -104,7 +114,7 @@ public class Akomi_mouvements : MonoBehaviour
             if(Time.time >= nextAttackTime)
                 {
                 attackPoint.gameObject.SetActive(true);
-                damage = 10;
+                damage = 80;
                 Special_Attack();
                      nextAttackTime = Time.time + 1f / attackRate;
                 }
@@ -136,6 +146,22 @@ public class Akomi_mouvements : MonoBehaviour
         
     }
 
+    void Attack()
+    {
+        if (IsTurnedRight)
+        {
+            animator.SetTrigger("Attack_1_right");
+            attackPoint = attackPointRight;
+        }
+        else
+        {
+            animator.SetTrigger("Attack_1_left");
+            attackPoint = attackPointLeft;
+        }
+        
+       
+    }
+
     void Attack2()
     {
         if (IsTurnedRight)
@@ -146,22 +172,6 @@ public class Akomi_mouvements : MonoBehaviour
         else
         {
             animator.SetTrigger("Attack_2_left");
-            attackPoint = attackPointLeft;
-        }
-        
-       
-    }
-
-    void Attack3()
-    {
-        if (IsTurnedRight)
-        {
-            animator.SetTrigger("Attack_3_right");
-            attackPoint = attackPointRight;
-        }
-        else
-        {
-            animator.SetTrigger("Attack_3_left");
             attackPoint = attackPointLeft;
         }
         

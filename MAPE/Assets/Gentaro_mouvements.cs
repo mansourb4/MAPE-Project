@@ -23,6 +23,13 @@ public class Gentaro_mouvements : MonoBehaviour
     float nextAttackTime = 0f;
     public bool isAttacking = false;
     public int damage = 0;
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +45,11 @@ public class Gentaro_mouvements : MonoBehaviour
     {
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         TakeInput();
-        Move();
-        if(Input.GetButtonDown("Jump") && isTouchingGround)
+        if (CanMove)
+        {
+            Move();
+        }
+        if (Input.GetButtonDown("Jump") && isTouchingGround && CanMove)
         {
             float force = jumpSpeed;
             if(player.velocity.y < 0)

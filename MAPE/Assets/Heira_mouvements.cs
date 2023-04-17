@@ -24,6 +24,13 @@ public class Heira_mouvements : MonoBehaviour
     float nextAttackTime = 0f;
     public bool isAttacking = false;
     public int damage = 0;
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +46,11 @@ public class Heira_mouvements : MonoBehaviour
     {
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         TakeInput();
-        Move();
-        if(Input.GetButtonDown("Jump") && isTouchingGround)
+        if (CanMove)
+        {
+            Move();
+        }
+        if (Input.GetButtonDown("Jump") && isTouchingGround && CanMove)
         {
             float force = jumpSpeed;
             if(player.velocity.y < 0)
@@ -78,7 +88,7 @@ public class Heira_mouvements : MonoBehaviour
             if (Time.time >= nextAttackTime)
             {
                 attackPoint.gameObject.SetActive(true);
-                damage = 10;
+                damage = 35;
                 Special_Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
@@ -90,7 +100,7 @@ public class Heira_mouvements : MonoBehaviour
             if (Time.time >= nextAttackTime)
             {
                 attackPoint.gameObject.SetActive(true);
-                damage = 10;
+                damage = 20;
                 Attack2();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
@@ -102,7 +112,7 @@ public class Heira_mouvements : MonoBehaviour
                 if (Time.time >= nextAttackTime)
                 {
                     attackPoint.gameObject.SetActive(true);
-                    damage = 10;
+                    damage = 20;
                     Attack3();
                     nextAttackTime = Time.time + 1f / attackRate;
                 }
@@ -144,6 +154,7 @@ public class Heira_mouvements : MonoBehaviour
         else
         {
             animator.SetTrigger("Attack_2_left");
+            attackPoint = attackPointLeft;
         }
         
        

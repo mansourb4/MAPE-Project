@@ -21,7 +21,7 @@ public class Attack1 : MonoBehaviour
     {
 
         Debug.Log("attaquer");
-        enemyHealth.TakeDamage(10);
+        enemyHealth.TakeDamage(akomi.damage);
 
     }
 }
