@@ -7,12 +7,9 @@ public class Heira_mouvements : MonoBehaviour
 {
     public float speed;
     private Vector2 direction;
-    private Animator animator;
-    public float jumpSpeed = 30f;
+    public Animator animator;
+    public float jumpForce = 30f;
     private Rigidbody2D player;
-    public Transform groundCheck;
-    public float groundCheckRadius;
-    public LayerMask groundLayer;
     private bool isTouchingGround;
     private bool IsTurnedRight = true;
     public Transform attackPointRight;
@@ -24,6 +21,9 @@ public class Heira_mouvements : MonoBehaviour
     float nextAttackTime = 0f;
     public bool isAttacking = false;
     public int damage = 0;
+    public Rigidbody2D playerRigidBody2D;
+    public BoxCollider2D playerBoxCollider2D;
+    public LayerMask platformLayerMask;
     public bool CanMove
     {
         get
@@ -35,7 +35,6 @@ public class Heira_mouvements : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         direction = Vector2.zero;
         attackPoint = attackPointRight;
     }
@@ -44,21 +43,15 @@ public class Heira_mouvements : MonoBehaviour
     
     void Update()
     {
-        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isTouchingGround = IsTouchingTheGround();
         TakeInput();
+        animator.SetBool("Is_Jumping", !isTouchingGround);
+        animator.SetFloat("Vertical_speed", playerRigidBody2D.velocity.y);
         if (CanMove)
         {
             Move();
         }
-        if (Input.GetButtonDown("Jump") && isTouchingGround && CanMove)
-        {
-            float force = jumpSpeed;
-            if(player.velocity.y < 0)
-            {
-                force -= player.velocity.y;
-            }
-            player.velocity = new Vector2(player.velocity.x, player.velocity.y + ((force + (0.5f * Time.fixedDeltaTime))/ player.mass));
-        }
+        
     }
     
 
@@ -70,20 +63,20 @@ public class Heira_mouvements : MonoBehaviour
            direction += Vector2.up;
         }
         
-        else if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             direction += Vector2.left;
             IsTurnedRight = false;
             attackPoint = attackPointLeft;
 
         }
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             direction += Vector2.right;
             IsTurnedRight = true;
             attackPoint = attackPointRight;
         }
-        else if (Input.GetKey(KeyCode.V))
+        if (Input.GetKey(KeyCode.V))
         {
             if (Time.time >= nextAttackTime)
             {
@@ -95,7 +88,7 @@ public class Heira_mouvements : MonoBehaviour
             attackPoint.gameObject.SetActive(false);
             isAttacking = false;
         }
-        else if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
             if (Time.time >= nextAttackTime)
             {
@@ -107,7 +100,7 @@ public class Heira_mouvements : MonoBehaviour
             attackPoint.gameObject.SetActive(false);
             isAttacking = false;
         }
-        else if (Input.GetKey(KeyCode.B))
+        if (Input.GetKey(KeyCode.B))
         {
                 if (Time.time >= nextAttackTime)
                 {
@@ -119,6 +112,19 @@ public class Heira_mouvements : MonoBehaviour
                 attackPoint.gameObject.SetActive(false);
                 isAttacking = false;
             }
+        if(Input.GetKeyDown(KeyCode.W) && isTouchingGround)
+        {
+            /*
+            float force = jumpForce;
+            if(playerRigidbody2D.velocity.y < 0)
+            {
+                force -= playerRigidbody2D.velocity.y;
+            }
+            playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, playerRigidbody2D.velocity.y + ((force + (0.5f * Time.fixedDeltaTime))/ playerRigidbody2D.mass));
+            */
+            
+            playerRigidBody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
         
 	}
 
@@ -188,7 +194,10 @@ public class Heira_mouvements : MonoBehaviour
             animator.SetTrigger("Spe_left");
             attackPoint = attackPointLeft;
         }
-        
-       
+    }
+    private bool IsTouchingTheGround()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerBoxCollider2D.bounds.center, playerBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, platformLayerMask);
+        return !(raycastHit.collider is null); // return if we collide to something
     }
 }
