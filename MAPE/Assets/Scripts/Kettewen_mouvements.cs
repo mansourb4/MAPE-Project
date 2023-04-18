@@ -45,12 +45,12 @@ public class Kettewen_mouvements : MonoBehaviour
     void TakeInput()
     {
         direction = Vector2.zero;
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.Space))
         {
            direction += Vector2.up;
         }
         
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.Q))
         {
             direction += Vector2.left;
             IsTurnedRight = false;

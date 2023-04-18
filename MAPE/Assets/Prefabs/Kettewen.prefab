@@ -105,12 +105,12 @@ GameObject:
   - component: {fileID: 406562844776929041}
   - component: {fileID: 406562844776929042}
   - component: {fileID: 406562844776929047}
-  - component: {fileID: 406562844776929046}
   - component: {fileID: 406562844776929045}
   - component: {fileID: 406562844776929044}
   - component: {fileID: 406562844776929067}
   - component: {fileID: 406562844776929066}
   - component: {fileID: -7380859454380743837}
+  - component: {fileID: 5838794811527253462}
   m_Layer: 0
   m_Name: Kettewen
   m_TagString: Untagged
@@ -234,25 +234,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18, y: 0.45}
   m_EdgeRadius: 0
---- !u!114 &406562844776929046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 406562844776929043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245a8a0dc55aa3048bef870ebeab5a2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  jumpSpeed: 30
-  groundCheck: {fileID: 406562844473337393}
-  groundCheckRadius: 5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &406562844776929045
 Rigidbody2D:
   serializedVersion: 4
@@ -341,3 +322,22 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5838794811527253462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406562844776929043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370768e0c20b64d58bb37d9c4dac9d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  jumpSpeed: 30
+  groundCheck: {fileID: 406562844473337393}
+  groundCheckRadius: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0

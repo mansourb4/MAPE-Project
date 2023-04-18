@@ -27,7 +27,6 @@ public class InstantiatePlayer : MonoBehaviour
     void Start()
     {
         playerName = MainMenu.instance.playerName;
-        
         switch (playerName)
         {
             case "Akomi":

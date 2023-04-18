@@ -74,12 +74,12 @@ GameObject:
   - component: {fileID: 5040640911087824090}
   - component: {fileID: 5040640911087824089}
   - component: {fileID: 5040640911087824088}
-  - component: {fileID: 5040640911087824095}
   - component: {fileID: 5040640911087824094}
   - component: {fileID: 5040640911087824068}
   - component: {fileID: 5040640911087824069}
   - component: {fileID: 5040640911087824070}
   - component: {fileID: 105943031703685247}
+  - component: {fileID: 459270953873009647}
   m_Layer: 0
   m_Name: Heira
   m_TagString: Untagged
@@ -202,25 +202,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.35}
   m_EdgeRadius: 0
---- !u!114 &5040640911087824095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040640911087824093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae549436326afc94ba680298a03aa475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
-  jumpSpeed: 30
-  groundCheck: {fileID: 5040640910261600744}
-  groundCheckRadius: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &5040640911087824094
 Rigidbody2D:
   serializedVersion: 4
@@ -309,3 +290,22 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &459270953873009647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040640911087824093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370768e0c20b64d58bb37d9c4dac9d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  jumpSpeed: 30
+  groundCheck: {fileID: 5040640910261600744}
+  groundCheckRadius: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
