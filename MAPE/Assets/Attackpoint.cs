@@ -22,7 +22,7 @@ public class Attackpoint : MonoBehaviour
     {
        
             Debug.Log("attaquer");
-            enemyHealth.TakeDamage(10);
+            enemyHealth.TakeDamage(gentaro.damage);
         
     }
 }
