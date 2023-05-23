@@ -7,6 +7,7 @@ public class AIchase : MonoBehaviour
     public GameObject player;
     public float speed;
     private float distance;
+    
     // Start is called before the first frame update
     void Start()
     {

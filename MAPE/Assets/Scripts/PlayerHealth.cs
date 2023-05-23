@@ -11,9 +11,9 @@ public class PlayerHealth : MonoBehaviour
     
     void Start()
     {
-        maxHealth = InstantiatePlayer.instance.maxHealth;
-        currentHealth = InstantiatePlayer.instance.currentHealth;
-        healthBar = InstantiatePlayer.instance.healthBar;
+        maxHealth = InstantiatePlayer.Instance.maxHealth;
+        currentHealth = InstantiatePlayer.Instance.currentHealth;
+        healthBar = InstantiatePlayer.Instance.healthBar;
             
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);

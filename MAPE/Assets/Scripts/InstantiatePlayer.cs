@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class InstantiatePlayer : MonoBehaviour
 {
-    public static InstantiatePlayer instance;
+    public static InstantiatePlayer Instance;
 
-    private void Awake() => instance = this;
+    private void Awake() => Instance = this;
 
     public GameObject playerAkomi;
     public GameObject playerGentaro;

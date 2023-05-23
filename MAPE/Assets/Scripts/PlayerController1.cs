@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
 using UnityEngine.InputSystem;
 
 public class PlayerController1 : MonoBehaviour
@@ -50,3 +51,4 @@ public class PlayerController1 : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, (Vector3)groundCheckDimensions);
     }
 }
+*/

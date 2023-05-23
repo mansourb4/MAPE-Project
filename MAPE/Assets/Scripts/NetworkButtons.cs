@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
 using Unity.Netcode;
 
 public class NetworkButtons : MonoBehaviour
@@ -18,3 +19,4 @@ public class NetworkButtons : MonoBehaviour
         GUILayout.EndArea();
     }
 }
+*/

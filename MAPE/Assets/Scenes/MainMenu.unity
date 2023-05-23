@@ -5099,6 +5099,7 @@ MonoBehaviour:
   localPanel: {fileID: 1712014368}
   soloPanel: {fileID: 1574938901}
   duoPanel: {fileID: 680584392}
+  playerName: 
 --- !u!1 &1168259600
 GameObject:
   m_ObjectHideFlags: 0
