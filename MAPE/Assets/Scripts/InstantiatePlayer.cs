@@ -24,29 +24,35 @@ public class InstantiatePlayer : MonoBehaviour
     
     public HealthBar healthBar;
 
+    private bool _instantiated=false;
+
     void Start()
     {
-        playerName = MainMenu.instance.playerName;
+        playerName = CharacterMenu.Instance.GetPlayerName();
         switch (playerName)
         {
             case "Akomi":
                 playerAkomi = Instantiate(playerAkomi, new Vector3(83, -37, 0), Quaternion.identity);
                 playerTransform = playerAkomi.transform;
+                _instantiated = true;
                 break;
             case "Gentaro":
                 playerGentaro = Instantiate(playerGentaro, new Vector3(83, -37, 0), Quaternion.identity);
                 playerTransform = playerGentaro.transform;
+                _instantiated = true;
                 break;
             case "Heira":
                 playerHeira = Instantiate(playerHeira, new Vector3(83, -37, 0), Quaternion.identity);
                 playerTransform = playerHeira.transform;
+                _instantiated = true;
                 break;
             case "Kettewen":
                 playerKettewen = Instantiate(playerKettewen, new Vector3(83, -37, 0), Quaternion.identity);
                 playerTransform = playerKettewen.transform;
+                _instantiated = true;
                 break;
             default:
-                throw new Exception("Wrong character exception");
+                break;
         }
 
         healthBar.SetMaxHealth(maxHealth);
@@ -55,5 +61,9 @@ public class InstantiatePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_instantiated)
+        {
+            Start();
+        }
     }
 }

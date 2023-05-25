@@ -7608,8 +7608,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1119415560}
-        m_TargetAssemblyTypeName: Scenes.MainMenu, Assembly-CSharp
-        m_MethodName: OpenSolo
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: LoadSolo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

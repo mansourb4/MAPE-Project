@@ -4,7 +4,7 @@ public class Followcam : MonoBehaviour
 {
     public Transform playerTransform;
     
-    private void FixedUpdate()
+    private void Update()
     {
         playerTransform = InstantiatePlayer.Instance.playerTransform;
         var position = playerTransform.position;
