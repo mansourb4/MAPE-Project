@@ -101,16 +101,6 @@ public class MainMenu : MonoBehaviour
         localPanel.SetActive(false);
     }
 
-    public void OpenSolo()
-    {
-        soloPanel.SetActive(true);
-    }
-    
-    public void CloseSolo()
-    {
-        soloPanel.SetActive(false);
-    }
-
     public void OpenDuo()
     {
         duoPanel.SetActive(true);
@@ -121,27 +111,8 @@ public class MainMenu : MonoBehaviour
         duoPanel.SetActive(false);
     }
 
-    public void OpenAkomiScene()
+    public void LoadSolo()
     {
-        playerName = "Akomi";
-        SceneManager.LoadScene(1);
-    }
-
-    public void OpenGentaroScene()
-    {
-        playerName = "Gentaro";
-        SceneManager.LoadScene(1);
-    }
-        
-    public void OpenHeiraScene()
-    {
-        playerName = "Heira";
-        SceneManager.LoadScene(1);
-    }
-        
-    public void OpenKettewenScene()
-    {
-        playerName = "Kettewen";
         SceneManager.LoadScene(1);
     }
 }
