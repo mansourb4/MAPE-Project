@@ -22,6 +22,11 @@ public class PlayerCombat : MonoBehaviour
     public bool canMove = true;
     
     
+    
+   
+
+    
+    
     void Update()
     {
         _isTurnedRight = animator.GetBool("Right");
@@ -120,5 +125,10 @@ public class PlayerCombat : MonoBehaviour
         {
             animator.SetTrigger("Spe_left");
         }    
+    }
+
+    private void CheckAttackHitBox()
+    {
+        
     }
 }
