@@ -14,6 +14,7 @@ public class InstantiatePlayer : MonoBehaviour
     public GameObject playerGentaro;
     public GameObject playerHeira;
     public GameObject playerKettewen;
+    public GameObject Enemy;
 
     public string playerName;
     
@@ -27,6 +28,7 @@ public class InstantiatePlayer : MonoBehaviour
     void Start()
     {
         playerName = MainMenu.instance.playerName;
+        Enemy = Instantiate(Enemy);
         switch (playerName)
         {
             case "Akomi":

@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class AttackPoint : MonoBehaviour
 {
-    public EnemyHealth enemyHealth;
+    public Enemies enemyHealth;
     public PlayerCombat player;
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         Debug.Log("Ennemi attaqué");
-        enemyHealth.TakeDamage(player.damage);
+        enemyHealth.GetComponent<Enemies>().TakeDamage(player.damage);
+       
     }
 }

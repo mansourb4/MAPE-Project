@@ -1,14 +1,19 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public GameObject Enemy;
     public int health;
     public int maxHealth = 100;
     void Start()
     {
+        
+        
+        
         health = maxHealth;
     }
 
@@ -29,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy died!");
+        
         Destroy(gameObject);
-    }
+    } 
 }

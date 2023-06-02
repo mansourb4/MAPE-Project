@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1503875632907643597}
   - component: {fileID: 1503875632907643598}
   - component: {fileID: 1503875632907643599}
+  - component: {fileID: 3520589957991953651}
   m_Layer: 7
   m_Name: AttackPointRight
   m_TagString: attack
@@ -71,8 +72,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4225cf0bf02e546dd95cad8290a233dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
+  enemyHealth: {fileID: 3520589957991953651}
   player: {fileID: 1503875633637141496}
+--- !u!114 &3520589957991953651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503875632907643596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f65c3e82ad74e76840fddb0ae6ed45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  knockbackSpeedX: 10
+  knockbackSpeedY: 5
+  knockbackDuration: 0.1
+  knockbackDeathSpeedX: 15
+  knockbackDeathSpeedY: 8
+  deathTorque: 1
 --- !u!1 &1503875633124093580
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,6 +104,7 @@ GameObject:
   - component: {fileID: 1503875633124093581}
   - component: {fileID: 1503875633124093582}
   - component: {fileID: 1503875633124093583}
+  - component: {fileID: 492555066794861362}
   m_Layer: 7
   m_Name: AttackPointLeft
   m_TagString: attack
@@ -144,8 +165,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4225cf0bf02e546dd95cad8290a233dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
+  enemyHealth: {fileID: 492555066794861362}
   player: {fileID: 1503875633637141496}
+--- !u!114 &492555066794861362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503875633124093580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f65c3e82ad74e76840fddb0ae6ed45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  knockbackSpeedX: 10
+  knockbackSpeedY: 5
+  knockbackDuration: 0.1
+  knockbackDeathSpeedX: 15
+  knockbackDeathSpeedY: 8
+  deathTorque: 1
 --- !u!1 &1503875633554567076
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +412,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
-  damage: 0
+  damage: 5
   canMove: 1
 --- !u!114 &1503875633637141495
 MonoBehaviour:

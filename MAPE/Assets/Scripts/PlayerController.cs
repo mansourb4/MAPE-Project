@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask groundLayer;
     private bool isTouchingGround;
-
+    private int facingDirection ;
     private bool IsTurnedRight = true;
 
     // Start is called before the first frame update
@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
             }
             player.velocity = new Vector2(player.velocity.x, player.velocity.y + (force + 0.5f * Time.fixedDeltaTime)/ player.mass);
         }
+    }
+    public int GetFacingDirection()
+    {
+        return facingDirection;
     }
 
     void TakeInput()
