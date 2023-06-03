@@ -167,9 +167,9 @@ GameObject:
   - component: {fileID: 1248103457852660605}
   - component: {fileID: 1248103457852660547}
   - component: {fileID: 1248103457852660546}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kettewen
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,8 +341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1248103457852660603}
-  attackPointRight: {fileID: 1248103456994117510}
-  attackPointLeft: {fileID: 1248103457966232496}
   attackRange: 0.5
   attackRate: 1
   enemyLayers:
@@ -350,6 +348,13 @@ MonoBehaviour:
     m_Bits: 128
   damage: 0
   canMove: 1
+  combatEnabled: 0
+  inputTimer: 0
+  attack1radius: 0
+  attack1damage: 0
+  attack1posr: {fileID: 0}
+  attack1posl: {fileID: 0}
+  attack1pos: {fileID: 0}
 --- !u!114 &1248103457852660546
 MonoBehaviour:
   m_ObjectHideFlags: 0

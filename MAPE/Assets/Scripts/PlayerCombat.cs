@@ -8,78 +8,122 @@ public class PlayerCombat : MonoBehaviour
 {
     public Animator animator;
 
-    private Transform _attackPoint;
-    public Transform attackPointRight;
-    public Transform attackPointLeft;
-    
+   
     public float attackRange = 0.5f;
     public float attackRate = 1f;
-    private float _nextAttackTime = 0f;
+    private float lastInputTime = Mathf.NegativeInfinity;
     public LayerMask enemyLayers;
     public int damage = 0;
-    private bool _isTurnedRight = true;
+    
 
     public bool canMove = true;
+    [SerializeField]
+    private bool combatEnabled;
+    [SerializeField]
+    private float inputTimer, attack1radius, attack1damage;
+    private bool gotInput , isAttacking;
+    private PlayerMovement pm;
+    public Enemycombats enemi;
+    public Transform[] attackposition;
+    private int currentposition;
     
-    
+
+
+    private void Start()
+    {
+        pm = GetComponent<PlayerMovement>();
+        animator = GetComponent<Animator>();
+        animator.SetBool("canAttack", combatEnabled);
+    }
+
     void Update()
     {
-        _isTurnedRight = animator.GetBool("Right");
+        pm.IsTurnedRight = animator.GetBool("Right");
         TakeInput();
+        CheckAttacks();
 
-        switch (_isTurnedRight)
+        Updatedposition();
+    }
+    private void Updatedposition()
+    {
+        if (pm.IsTurnedRight)
         {
-            case true:
-                _attackPoint = attackPointRight;
-                break;
-            default:
-                _attackPoint = attackPointLeft;
-                break;
+            currentposition = 1;
+        }
+        else
+        {
+            currentposition = 0;
+        }
+    }
+    void TakeInput()
+    {
+        if (Input.GetKey(KeyCode.F) && combatEnabled)
+        {
+            gotInput = true;
+            lastInputTime = Time.time;
+            
+                
+                
+               
+                    
+                    damage = 40;
+                    Attack();
+                    
+                
+              
+            
+            
+        }
+        
+        if (Input.GetKey(KeyCode.B) && combatEnabled)
+        {
+            gotInput = true;
+            lastInputTime = Time.time;
+            
+            
+                
+                Attack2();
+                
+            
+
+            
+        }
+        
+        if (Input.GetKey(KeyCode.V) && combatEnabled)
+        {
+            gotInput = true;
+            lastInputTime = Time.time;
+            
+            
+               
+                
+                Special_Attack();
+               
+            
+            
         }
     }
 
-    void TakeInput()
+    private void CheckAttacks()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (gotInput)
         {
-            if(Time.time >= _nextAttackTime)
+            if (!isAttacking)
             {
-                _attackPoint.gameObject.SetActive(true);
-                damage = 40;
-                Attack();
-                _nextAttackTime = Time.time + 1f / attackRate;
+                gotInput = false;
+                isAttacking = true;
+                animator.SetBool("isAttacking",isAttacking);
             }
-            _attackPoint.gameObject.SetActive(false);
         }
-        
-        if (Input.GetKey(KeyCode.B))
+        if(Time.time >= lastInputTime + inputTimer)
         {
-            if(Time.time >= _nextAttackTime)
-            {
-                _attackPoint.gameObject.SetActive(true);
-                damage = 35;
-                Attack2();
-                _nextAttackTime = Time.time + 1f / attackRate;
-            }
-            _attackPoint.gameObject.SetActive(false);
-        }
-        
-        if (Input.GetKey(KeyCode.V))
-        {
-            if(Time.time >= _nextAttackTime)
-            {
-                _attackPoint.gameObject.SetActive(true);
-                damage = 80;
-                Special_Attack();
-                _nextAttackTime = Time.time + 1f / attackRate;
-            }
-            _attackPoint.gameObject.SetActive(false);
+            gotInput = false;
         }
     }
 
     void Attack()
     {
-        if (_isTurnedRight)
+        if (pm.IsTurnedRight)
         {
             animator.SetTrigger("Attack_1_right");
         }
@@ -100,7 +144,7 @@ public class PlayerCombat : MonoBehaviour
     
     void Attack2()
     {
-        if (_isTurnedRight)
+        if (pm.IsTurnedRight)
         {
             animator.SetTrigger("Attack_2_right");
         }
@@ -109,10 +153,31 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Attack_2_left");
         }
     }
+    private void CheckAttackHitbox()
+    {
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackposition[currentposition].position,attack1radius,enemyLayers) ;
+        foreach (Collider2D collider in detectedObjects)
+        {
+
+            Debug.Log("hit");
+            collider.gameObject.GetComponent<Enemycombats>().Damage(damage);
+            
+
+        }
+
+    }
+     
+    
+
+    private void FinishAttack()
+    {
+        isAttacking = false;
+        animator.SetBool("isAttacking",isAttacking);
+    }
 
     void Special_Attack()
     {
-        if (_isTurnedRight)
+        if (pm.IsTurnedRight)
         {
             animator.SetTrigger("Spe_right");
         }
@@ -120,5 +185,11 @@ public class PlayerCombat : MonoBehaviour
         {
             animator.SetTrigger("Spe_left");
         }    
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackposition[currentposition].position, attack1radius);
+        
     }
 }

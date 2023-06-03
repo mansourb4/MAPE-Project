@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9102080434960663308}
   - component: {fileID: 9102080434960663310}
   - component: {fileID: 7662152745055775910}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPointRight
   m_TagString: attack
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 9102080435200635349}
   - component: {fileID: 9102080435200635351}
   - component: {fileID: 9102080435200635350}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Akomi
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -282,8 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9102080435200634927}
-  attackPointRight: {fileID: 9102080434960663308}
-  attackPointLeft: {fileID: 9102080435866546290}
   attackRange: 0.5
   attackRate: 1
   enemyLayers:
@@ -291,6 +289,13 @@ MonoBehaviour:
     m_Bits: 128
   damage: 0
   canMove: 1
+  combatEnabled: 0
+  inputTimer: 0
+  attack1radius: 0
+  attack1damage: 0
+  attack1posr: {fileID: 0}
+  attack1posl: {fileID: 0}
+  attack1pos: {fileID: 0}
 --- !u!1 &9102080435620576347
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +338,7 @@ GameObject:
   - component: {fileID: 9102080435866546290}
   - component: {fileID: 9102080435866546292}
   - component: {fileID: 504462161767933715}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPointLeft
   m_TagString: attack
   m_Icon: {fileID: 0}

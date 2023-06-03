@@ -10,13 +10,15 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 30f;
     private Rigidbody2D player;
     private bool isTouchingGround;
-    private bool IsTurnedRight = true;
+    public bool IsTurnedRight = true;
     public bool isAttacking = false;
     public BoxCollider2D playerBoxCollider2D;
     public Rigidbody2D playerRigidbody2D;
     public LayerMask platformLayerMask;
+    
 
     // Update is called once per frame
+   
     void Update()
     {
         isTouchingGround = IsTouchingGround();
@@ -30,7 +32,17 @@ public class PlayerMovement : MonoBehaviour
             Move();
         }
     }
-
+    public int GetFacingDirection()
+    {
+        if (IsTurnedRight)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
     private void Move()
     {
         transform.Translate(_direction * (speed * Time.deltaTime));

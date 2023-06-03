@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 1588062111256988912}
   - component: {fileID: 1588062111256988914}
   - component: {fileID: 1588062111256988913}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Heira
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,8 +188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1588062111256988909}
-  attackPointRight: {fileID: 1588062113020834653}
-  attackPointLeft: {fileID: 1588062112740545189}
   attackRange: 0.5
   attackRate: 1
   enemyLayers:
@@ -197,6 +195,13 @@ MonoBehaviour:
     m_Bits: 128
   damage: 0
   canMove: 1
+  combatEnabled: 0
+  inputTimer: 0
+  attack1radius: 0
+  attack1damage: 0
+  attack1posr: {fileID: 0}
+  attack1posl: {fileID: 0}
+  attack1pos: {fileID: 0}
 --- !u!114 &1588062111256988913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +265,7 @@ GameObject:
   - component: {fileID: 1588062112740545189}
   - component: {fileID: 1588062112740545191}
   - component: {fileID: 1588062112740545192}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPointLeft
   m_TagString: attack
   m_Icon: {fileID: 0}
@@ -333,7 +338,7 @@ GameObject:
   - component: {fileID: 1588062113020834653}
   - component: {fileID: 1588062113020834655}
   - component: {fileID: 1588062113020834592}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPointRight
   m_TagString: attack
   m_Icon: {fileID: 0}
