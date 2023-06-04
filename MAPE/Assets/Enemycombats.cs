@@ -37,10 +37,12 @@ public class Enemycombats : MonoBehaviour
         if (playerFacingDirection == 1)
         {
             playerOnLeft = true;
+            anim.SetTrigger("frost_hurt_left");
         }
         else
         {
             playerOnLeft = false;
+            anim.SetTrigger("frost_hurt_left");
         }
         anim.SetBool("playerOnLeft", playerOnLeft);
         anim.SetTrigger("damage");
@@ -60,7 +62,11 @@ public class Enemycombats : MonoBehaviour
     {
         knockback = true;
         knockbackStart = Time.time;
-        rb.velocity = new Vector2(knockbackspeedX * playerFacingDirection, knockbackSpeedY);
+        
+     
+            rb.velocity = new Vector2(knockbackspeedX * playerFacingDirection, knockbackSpeedY);
+       
+        
 
     }
 

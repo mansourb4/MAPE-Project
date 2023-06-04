@@ -144,7 +144,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heira_special_attack_left
+  m_Name: Spe_left
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -294,7 +294,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hiera_atack_1_left
+  m_Name: Attack_1_left 0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -338,7 +338,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heira_attacking_2_right
+  m_Name: Attack_2_right
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -365,7 +365,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heira_attack_1
+  m_Name: Attack_1_right
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -738,6 +738,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: canAttack
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: isAttacking
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -758,7 +770,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heira_attacking_2_left
+  m_Name: Attack_2_left
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1124,7 +1136,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heira_special_attack_right
+  m_Name: Spe_right
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
