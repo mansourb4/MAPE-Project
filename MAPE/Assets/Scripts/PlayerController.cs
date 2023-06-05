@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         if (IsTurnedRight)
         {
-            return 0;
+            return -1;
         }
         else
         {

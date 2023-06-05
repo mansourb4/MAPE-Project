@@ -61,6 +61,7 @@ public class InstantiatePlayer : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             enemy.GetComponent<Enemycombats>().FindPlayer();
+           
         }
     }
 
