@@ -6,11 +6,13 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth;
     public int currentHealth;
+   
 
     public HealthBar healthBar;
     
     void Start()
     {
+        
         maxHealth = InstantiatePlayer.Instance.maxHealth;
         currentHealth = InstantiatePlayer.Instance.currentHealth;
         healthBar = InstantiatePlayer.Instance.healthBar;
@@ -21,15 +23,23 @@ public class PlayerHealth : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(20);
-        }
+        healthBar.SetHealth(currentHealth);
+        Death();
+        
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        Death();
+    }
+
+    void Death()
+    {
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

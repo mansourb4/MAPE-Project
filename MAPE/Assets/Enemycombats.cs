@@ -5,17 +5,17 @@ using UnityEngine;
 public class Enemycombats : MonoBehaviour
 {
     [SerializeField]
-    private float maxHealth, knockbackspeedX, knockbackSpeedY, knockbackDuration;
+    private float maxHealth, knockbackspeedX, knockbackSpeedY, knockbackDuration, radius;
     [SerializeField]
     private bool applyKnockback;
     private float currentHealth, knockbackStart, distance;
     public int agroDistance;
     private PlayerMovement pc;
     private Rigidbody2D rb;
+    [SerializeField]
     private Animator anim;
     private int playerFacingDirection;
     private bool playerOnLeft, knockback, wallDetected;
-    private Vector2 movement;
     [SerializeField]
     private Transform wallCheck;
     [SerializeField]
@@ -23,9 +23,19 @@ public class Enemycombats : MonoBehaviour
     [SerializeField]
     private float wallCheckDistance,
                   movementSpeed;
+    private float nextAttacktime ;
+    public Transform attackpoint, attackpointr,attackpointl;
+    // public PlayerHealth ph;
+    public float rate;
+    public LayerMask player;
+    public int ennemyDamage;
+    private int currentposition;
     private void Start()
     {
+        nextAttacktime = Time.time;
+        anim.SetBool("Dead", false);
         anim.SetBool("inRange", false);
+        
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -33,14 +43,17 @@ public class Enemycombats : MonoBehaviour
     }
     private void Update()
     {
+        
         distance = Vector2.Distance(transform.position, pc.transform.position);
         if (pc.transform.position.x > this.gameObject.transform.position.x)
         {
             playerOnLeft = false;
+            
         }
         else
         {
             playerOnLeft = true;
+
         }
         CheckKnockback();
         wallDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, Plateform);
@@ -49,16 +62,19 @@ public class Enemycombats : MonoBehaviour
         {
             Flip();
         }
-        else if (playerOnLeft)
+        else if (playerOnLeft )
         {
-            movement.Set(-movementSpeed, rb.velocity.y);
-            rb.velocity = movement;
+            transform.position += Vector3.left * movementSpeed * Time.deltaTime;
         }
-        else
+        else 
         {
-            movement.Set(movementSpeed, rb.velocity.y);
-            rb.velocity = movement;
+            transform.position += Vector3.right * movementSpeed * Time.deltaTime;
         }
+        
+        
+        
+           
+        
         pc.GetFacingDirection();
 
         Attack();
@@ -66,21 +82,22 @@ public class Enemycombats : MonoBehaviour
     }
     public void Damage(float amount)
     {
+        
         currentHealth -= amount;
         playerFacingDirection = pc.GetFacingDirection();
 
         if (playerFacingDirection == 1)
         {
             playerOnLeft = true;
-            anim.SetTrigger("frost_hurt_left");
+           
         }
         else
         {
             playerOnLeft = false;
-            anim.SetTrigger("frost_hurt_right");
+           
         }
         
-        anim.SetTrigger("damage");
+       // anim.SetTrigger("damage");
         if (applyKnockback && currentHealth > 0.0f)
         {
             //Knockback
@@ -95,20 +112,20 @@ public class Enemycombats : MonoBehaviour
 
     private void Knockback()
     {
+        
         knockback = true;
         knockbackStart = Time.time;
+        
 
         if (playerOnLeft)
         {
-            rb.velocity = new Vector2( knockbackspeedX , knockbackSpeedY);
+            rb.velocity = new Vector2(- knockbackspeedX , knockbackSpeedY);
         }
         else
         {
-            rb.velocity = new Vector2(-knockbackspeedX, knockbackSpeedY);
+            rb.velocity = new Vector2(knockbackspeedX, knockbackSpeedY);
 
         }
-
-
 
 
     }
@@ -123,7 +140,9 @@ public class Enemycombats : MonoBehaviour
     }
     private void Die()
     {
-        this.gameObject.SetActive(false);
+        anim.SetBool("Dead", true);
+        anim.Play("frost_Death");
+        Destroy(gameObject);
     }
     public void FindPlayer()
     {
@@ -136,10 +155,12 @@ public class Enemycombats : MonoBehaviour
         if (playerOnLeft)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            attackpoint = attackpointr;
         }
         else
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            attackpoint = attackpointl;
         }
     }
 
@@ -150,15 +171,33 @@ public class Enemycombats : MonoBehaviour
 
     private void Attack()
     {
-        if ((distance <= agroDistance ))
+        
+        if ((distance <= agroDistance ) && Time.time >= nextAttacktime)
         {
-            anim.SetBool("inRange", true);
-            anim.SetTrigger("Frost_Guardian_attacking_left");
+            
+           anim.SetBool("inRange", true);
+           anim.Play("Frost_Guardian_attacking_left");
+           nextAttacktime = Time.time + rate;
+            Collider2D playercollider = Physics2D.OverlapCircle(attackpoint.position, radius);
+            playercollider.gameObject.GetComponent<PlayerHealth>().TakeDamage(ennemyDamage);
+            Debug.Log("hit");
+
             
         }
         
-            anim.SetBool("inRange", false);
+        anim.SetBool("inRange", false);
         
     }
+    
 
+    private void OnDrawGizmosSelected()
+    {
+       
+        Gizmos.DrawWireSphere(attackpoint.position, radius);
+
+    }
+
+    
+        
+    
 }
