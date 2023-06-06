@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D playerBoxCollider2D;
     public Rigidbody2D playerRigidbody2D;
     public LayerMask platformLayerMask;
+    public LayerMask enemyLayerMask;
 
     // Update is called once per frame
     void Update()
@@ -40,18 +42,23 @@ public class PlayerMovement : MonoBehaviour
     private void TakeInput()
     {
         _direction = Vector2.zero;
+        bool isController = false;
+        if (Gamepad.all.Count > 0)
+        {
+            isController = true;
+        }
         
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || (isController && Gamepad.all[0].leftStick.left.isPressed))
         {
             _direction += Vector2.left;
             IsTurnedRight = false;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D)|| (isController && Gamepad.all[0].leftStick.right.isPressed))
         {
             _direction += Vector2.right;
             IsTurnedRight = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && isTouchingGround)
+        if ((Input.GetKeyDown(KeyCode.Space) || (isController && Gamepad.all[0].circleButton.wasPressedThisFrame)) && isTouchingGround)
         {
             playerRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -75,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsTouchingGround()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(playerBoxCollider2D.bounds.center, playerBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, platformLayerMask);
-        return !(raycastHit.collider is null); // return if we collide to something
+        RaycastHit2D raycastHitEnemy = Physics2D.BoxCast(playerBoxCollider2D.bounds.center, playerBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, enemyLayerMask);
+        return !(raycastHit.collider == raycastHitEnemy.collider && raycastHit.collider is null); // return if we collide to something
     }
 }
