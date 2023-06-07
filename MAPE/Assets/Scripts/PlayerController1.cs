@@ -2,53 +2,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
+
 using UnityEngine.InputSystem;
 
 public class PlayerController1 : MonoBehaviour
 {
-    private Rigidbody2D rb2D => GetComponent<Rigidbody2D>();
+    private CustomInput _input = null;
+    private Vector2 _moveVector = Vector2.zero;
 
-    [SerializeField] private float jumpForce;
-    [SerializeField] private Vector2 groundCheckDimensions;
-    [SerializeField] private LayerMask platformLayer;
-    [SerializeField] private float movementSpeed;
-
-    private bool isGrounded;
-    private float horizontalInput;
-
-    private void OnJump()
+    private void Awake()
     {
-        if (isGrounded)
-        {
-            rb2D.velocity += Vector2.up * jumpForce;
-        }
+        _input = new CustomInput();
     }
 
-    private void OnHorizontalMovement(InputValue axis)
+    private void OnEnable()
     {
-        horizontalInput = axis.Get<float>();
+        _input.Enable();
+        _input.Player.Movement.performed += OnMovementPerformed;
+        _input.Player.Movement.performed += OnMovementCancelled;
+
     }
-    
-    private void Update()
+
+    private void OnDisable()
     {
-        CheckForGround();
+        _input.Disable();
+        _input.Player.Movement.performed -= OnMovementPerformed;
+        _input.Player.Movement.performed -= OnMovementCancelled;
     }
-    
+
     private void FixedUpdate()
     {
-        rb2D.velocity = new Vector2(horizontalInput * movementSpeed, rb2D.velocity.y);
+        Debug.Log(_moveVector);
     }
 
-    private void CheckForGround()
+    private void OnMovementPerformed(InputAction.CallbackContext value)
     {
-        isGrounded = Physics2D.BoxCast(transform.position, groundCheckDimensions, 0f,
-            -transform.up, 0.1f, platformLayer);
+        _moveVector = value.ReadValue<Vector2>();
     }
-
-    private void OnDrawGizmosSelected()
+    
+    private void OnMovementCancelled(InputAction.CallbackContext value)
     {
-        Gizmos.DrawWireCube(transform.position, (Vector3)groundCheckDimensions);
+        _moveVector = Vector2.zero;
     }
 }
-*/
