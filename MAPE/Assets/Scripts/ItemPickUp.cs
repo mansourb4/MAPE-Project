@@ -10,23 +10,16 @@ public class ItemPickUp : MonoBehaviour
 
     void PickUp()
     {
-        InventoryManager.instance.Add(item);
-        Destroy(gameObject);
+        if (InventoryManager.instance.nbItem < InventoryManager.instance.capacity)
+        {
+            InventoryManager.instance.Add(item);
+            Debug.Log($"{item.itemName} ramassé");
+            Destroy(gameObject);
+        }
     }
 
     private void OnMouseDown()
     {
         PickUp();
-    }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

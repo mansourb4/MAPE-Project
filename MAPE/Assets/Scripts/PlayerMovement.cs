@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D playerRigidbody2D;
     public LayerMask platformLayerMask;
     public LayerMask enemyLayerMask;
+    public static InstantiatePlayer instancePlayer;
+    private void Start()
+    {
+        instancePlayer = InstantiatePlayer.Instance;
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
         if(animator.GetBool("canMove"))
         {
             Move();
+        }
+
+        if (instancePlayer.boots)
+        {
+            speed = 7;
         }
     }
 

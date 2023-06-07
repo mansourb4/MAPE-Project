@@ -19,10 +19,14 @@ public class InstantiatePlayer : MonoBehaviour
     
     public Transform playerTransform;
 
-    public int maxHealth = 100;
+    public int maxHealth;
     public int currentHealth;
     
     public HealthBar healthBar;
+    public int nbAttackPotion = 0;
+    public bool armor = false;
+    public bool boots = false;
+    public int toHeal = 0;
 
     void Start()
     {

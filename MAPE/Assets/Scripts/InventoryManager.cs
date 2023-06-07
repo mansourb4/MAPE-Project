@@ -9,15 +9,23 @@ public class InventoryManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static InventoryManager instance;
+    public static InstantiatePlayer playerInstance;
     public List<Item> items = new List<Item>();
     public Transform itemContent;
     public GameObject inventoryItem;
     public Toggle enableRemove;
     public InventoryItemController[] inventoryItems;
+    public int capacity = 10;
+    public int nbItem = 0;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        nbItem = items.Count;
     }
 
     public void Add(Item itemToAdd)
@@ -28,6 +36,7 @@ public class InventoryManager : MonoBehaviour
     public void Remove(Item itemToRemove)
     {
         items.Remove(itemToRemove);
+        
     }
 
     public void ListItems()

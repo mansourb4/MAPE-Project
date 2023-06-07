@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,8 +21,13 @@ public class PlayerCombat : MonoBehaviour
     private bool _isTurnedRight = true;
 
     public bool canMove = true;
-    
-    
+    public InstantiatePlayer instancePlayer;
+
+    private void Start()
+    {
+        instancePlayer = InstantiatePlayer.Instance;
+    }
+
     void Update()
     {
         _isTurnedRight = animator.GetBool("Right");
@@ -45,7 +51,7 @@ public class PlayerCombat : MonoBehaviour
             if(Time.time >= _nextAttackTime)
             {
                 _attackPoint.gameObject.SetActive(true);
-                damage = 40;
+                damage = 40 + 10 * instancePlayer.nbAttackPotion;
                 Attack();
                 _nextAttackTime = Time.time + 1f / attackRate;
             }
@@ -57,7 +63,7 @@ public class PlayerCombat : MonoBehaviour
             if(Time.time >= _nextAttackTime)
             {
                 _attackPoint.gameObject.SetActive(true);
-                damage = 35;
+                damage = 35 + 10 * instancePlayer.nbAttackPotion;
                 Attack2();
                 _nextAttackTime = Time.time + 1f / attackRate;
             }
@@ -69,7 +75,7 @@ public class PlayerCombat : MonoBehaviour
             if(Time.time >= _nextAttackTime)
             {
                 _attackPoint.gameObject.SetActive(true);
-                damage = 80;
+                damage = 80 + 10 * instancePlayer.nbAttackPotion;
                 Special_Attack();
                 _nextAttackTime = Time.time + 1f / attackRate;
             }
