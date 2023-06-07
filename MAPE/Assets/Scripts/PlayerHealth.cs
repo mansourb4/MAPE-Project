@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth;
     public int currentHealth;
+    public Animator anim;
    
 
     public HealthBar healthBar;
@@ -25,6 +26,12 @@ public class PlayerHealth : MonoBehaviour
     {
         healthBar.SetHealth(currentHealth);
         Death();
+        if (anim.GetBool("Destroygo") is true)
+        {
+            Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+       
         
     }
 
@@ -39,7 +46,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            
+            anim.SetTrigger("isDead");  
+         
         }
     }
 }

@@ -240,7 +240,7 @@ MonoBehaviour:
   radius: 0.5
   applyKnockback: 1
   isTouchingGround: 0
-  agroattackrange: 5
+  agroattackrange: 3
   anim: {fileID: 379638165905710111}
   wallCheck: {fileID: 6724210934998703015}
   Plateform:
@@ -258,7 +258,7 @@ MonoBehaviour:
   plateform:
     serializedVersion: 2
     m_Bits: 64
-  ennemyDamage: 10
+  ennemyDamage: 30
   ennemyBoxCollider2D: {fileID: 7427327724671907508}
 --- !u!1 &7550433208015121529
 GameObject:

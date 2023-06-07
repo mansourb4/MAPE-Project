@@ -179,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  anim: {fileID: 9102080435200634927}
   healthBar: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
 --- !u!61 &9102080435200635349
 BoxCollider2D:
@@ -252,6 +253,7 @@ MonoBehaviour:
   inputTimer: 0.2
   attack1radius: 0.8
   attack1damage: 10
+  nextAttacktime: 0
   enemi: {fileID: 6399632633193781564, guid: 645bf56d494c84f1e8bdc5576dfd724f, type: 3}
   attackposition:
   - {fileID: 9102080435866546290}

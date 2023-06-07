@@ -134,13 +134,8 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Attack_1_left");
         }
         
-        /*
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.position, attackRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Gentaro a attaqué " + enemy.name);
-        }
-        */
+        
+       
     }
     
     void Attack2()

@@ -15,7 +15,7 @@ public class Enemycombats : MonoBehaviour
     [SerializeField]
     private Animator anim;
     private int playerFacingDirection;
-    private bool playerOnLeft, knockback, wallDetected;
+    private bool playerOnLeft, knockback, wallDetected, isAttacking;
     [SerializeField]
     private Transform wallCheck;
     [SerializeField]
@@ -31,11 +31,18 @@ public class Enemycombats : MonoBehaviour
     public int ennemyDamage;
     public BoxCollider2D ennemyBoxCollider2D;
     private float aggrodistance;
+    public bool CanMove
+    {
+        get
+        {
+            return anim.GetBool("canMove");
+        }
+
+    }
     private void Start()
     {
        
         nextAttacktime = Time.time;
-        anim.SetBool("Dead", false);
         anim.SetBool("inRange", false);
         ennemyBoxCollider2D = GetComponent<BoxCollider2D>();
         currentHealth = maxHealth;
@@ -45,6 +52,7 @@ public class Enemycombats : MonoBehaviour
     }
     private void Update()
     {
+        Attack();
         isTouchingGround = IsTouchingGround();
         attackrange = Vector2.Distance(transform.position, pc.transform.position);
         aggrodistance = Vector2.Distance(transform.position, pc.transform.position);
@@ -65,33 +73,38 @@ public class Enemycombats : MonoBehaviour
         {
             Flip();
         }
-        if (aggrodistance <= 10f && isTouchingGround)
-        {
-             if (playerOnLeft)
+       
+            if (aggrodistance <= 10f && isTouchingGround)
             {
-                transform.position += Vector3.left * movementSpeed * Time.deltaTime;
-            }
-            else
-            {
-                transform.position += Vector3.right * movementSpeed * Time.deltaTime;
-            }
+                if (playerOnLeft && CanMove)
+                {
+                    transform.position += Vector3.left * movementSpeed * Time.deltaTime;
+                }
+                else if(CanMove)
+                {
+                    transform.position += Vector3.right * movementSpeed * Time.deltaTime;
+                }
             
+             }
+             else
+                 {
+                    anim.Play("idle_left");
+                  }
 
-        }
-        else
+
+        if (anim.GetBool("Destroygo") is true)
         {
-            anim.Play("frost_idle_left");
+            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
-
-
-
 
 
         pc.GetFacingDirection();
 
-        Attack();
+        
         
     }
+   
     public void Damage(float amount)
     {
         
@@ -154,9 +167,8 @@ public class Enemycombats : MonoBehaviour
     }
     private void Die()
     {
-        anim.SetBool("Dead", true);
-        anim.Play("frost_Death");
-        Destroy(gameObject);
+        
+        anim.SetTrigger("isDead");
     }
     public void FindPlayer()
     {
@@ -166,16 +178,19 @@ public class Enemycombats : MonoBehaviour
 
     private void Flip()
     {
-        if (playerOnLeft)
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            attackpoint = attackpointr;
-        }
-        else
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            attackpoint = attackpointl;
-        }
+        
+            if (playerOnLeft)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                attackpoint = attackpointr;
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                attackpoint = attackpointl;
+            }
+        
+       
     }
 
     private void OnDrawGizmos()
@@ -190,20 +205,24 @@ public class Enemycombats : MonoBehaviour
         {
             
             anim.SetBool("inRange", true);
-           anim.Play("Frost_Guardian_attacking_left");
-           nextAttacktime = Time.time + rate;
-            Collider2D playercollider = Physics2D.OverlapCircle(attackpoint.position, radius);
-            playercollider.gameObject.GetComponent<PlayerHealth>().TakeDamage(ennemyDamage);
+            anim.Play("attacking_left");
+            nextAttacktime = Time.time + rate;
+            
             Debug.Log("hit");
 
             
         }
-       
         anim.SetBool("inRange", false);
-        
-    }
-    
 
+
+    }
+    private void checkAttack()
+    {
+        Collider2D playercollider = Physics2D.OverlapCircle(attackpoint.position, radius);
+        playercollider.gameObject.GetComponent<PlayerHealth>().TakeDamage(ennemyDamage);
+    }
+
+  
     private void OnDrawGizmosSelected()
     {
        

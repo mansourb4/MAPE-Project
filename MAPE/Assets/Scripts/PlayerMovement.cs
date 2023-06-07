@@ -15,22 +15,34 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D playerBoxCollider2D;
     public Rigidbody2D playerRigidbody2D;
     public LayerMask platformLayerMask;
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool("canMove");
+        }
+            
+    }
+    
     
 
     // Update is called once per frame
    
     void Update()
     {
+        
         isTouchingGround = IsTouchingGround();
         TakeInput();
-        Move();
+        
+            Move();
+        
+       
         animator.SetBool("Is_Jumping", !isTouchingGround);
         animator.SetFloat("Vertical_speed", playerRigidbody2D.velocity.y);
         
-        if(animator.GetBool("canMove"))
-        {
+        
             Move();
-        }
+        
     }
     public int GetFacingDirection()
     {
@@ -45,28 +57,36 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Move()
     {
-        transform.Translate(_direction * (speed * Time.deltaTime));
-        SetAnimatorMovement(_direction);
+        if (CanMove)
+        {
+            transform.Translate(_direction * (speed * Time.deltaTime));
+            SetAnimatorMovement(_direction);
+        }
+        
     }
 
     private void TakeInput()
     {
         _direction = Vector2.zero;
+        if (CanMove)
+        {
+            if (Input.GetKey(KeyCode.S))
+            {
+                _direction += Vector2.left;
+                IsTurnedRight = false;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _direction += Vector2.right;
+                IsTurnedRight = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && isTouchingGround)
+            {
+                playerRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+        }
         
-        if (Input.GetKey(KeyCode.S))
-        {
-            _direction += Vector2.left;
-            IsTurnedRight = false;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _direction += Vector2.right;
-            IsTurnedRight = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && isTouchingGround)
-        {
-            playerRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        
     }
     
     void SetAnimatorMovement(Vector2 direction)
