@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 1f;
     private float lastInputTime = Mathf.NegativeInfinity;
     public LayerMask enemyLayers;
-    public int damage = 0;
+    private int damage = 0;
     
 
     public bool canMove = true;
@@ -24,9 +24,9 @@ public class PlayerCombat : MonoBehaviour
     private bool gotInput , isAttacking;
     private PlayerMovement pm;
     public Enemycombats enemi;
-    public Transform[] attackposition;
+    public Transform[] attackposition; 
     private int currentposition;
-    
+    public float cooldownattack1, cooldownattack2, cooldownattack3;
 
 
     private void Start()
@@ -58,51 +58,65 @@ public class PlayerCombat : MonoBehaviour
     }
     void TakeInput()
     {
-        if (Input.GetKey(KeyCode.F) && combatEnabled && (Time.time >= nextAttacktime))
+        if (Time.time - lastInputTime < cooldownattack1)
         {
-            gotInput = true;
-            lastInputTime = Time.time;
-            nextAttacktime = Time.time + attackRate;
+            return;
+        }
+            if (Input.GetKey(KeyCode.F) && combatEnabled && (Time.time >= nextAttacktime))
+            {
+                gotInput = true;
+                lastInputTime = Time.time;
+                nextAttacktime = Time.time + attackRate;
 
 
 
+                damage = 20;
+                Attack();
 
-            damage = 40;
-                    Attack();
-                    
-                
-              
+
+
             
+      
+        }
+
+        if (Time.time - lastInputTime < cooldownattack2)
+        {
+            return;
+        }
+            if (Input.GetKey(KeyCode.B) && combatEnabled && (Time.time >= nextAttacktime))
+            {
+                gotInput = true;
+                lastInputTime = Time.time;
+                nextAttacktime = Time.time + attackRate;
+
+                damage = 40;
+                Attack2();
+
+
+
+
             
         }
-        
-        if (Input.GetKey(KeyCode.B) && combatEnabled && (Time.time >= nextAttacktime))
+
+        if (Time.time - lastInputTime < cooldownattack3)
         {
-            gotInput = true;
-            lastInputTime = Time.time;
-            nextAttacktime = Time.time + attackRate;
+            return;
+        }
+            if (Input.GetKey(KeyCode.V) && combatEnabled && (Time.time >= nextAttacktime))
+            {
+                gotInput = true;
+                lastInputTime = Time.time;
+                nextAttacktime = Time.time + attackRate;
+
+                damage = 60;
+
+                Special_Attack();
 
 
-            Attack2();
-                
-            
 
             
         }
-        
-        if (Input.GetKey(KeyCode.V) && combatEnabled && (Time.time >= nextAttacktime))
-        {
-            gotInput = true;
-            lastInputTime = Time.time;
-            nextAttacktime = Time.time + attackRate;
-
-
-
-            Special_Attack();
-               
             
-            
-        }
     }
 
     private void CheckAttacks()
