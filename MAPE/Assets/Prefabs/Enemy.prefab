@@ -239,13 +239,14 @@ MonoBehaviour:
   knockbackDuration: 0.1
   radius: 0.5
   applyKnockback: 1
-  agroDistance: 5
+  isTouchingGround: 0
+  agroattackrange: 5
   anim: {fileID: 379638165905710111}
   wallCheck: {fileID: 6724210934998703015}
   Plateform:
     serializedVersion: 2
     m_Bits: 64
-  wallCheckDistance: 5
+  wallCheckattackrange: 0
   movementSpeed: 2.5
   attackpoint: {fileID: 2294194857208282161}
   attackpointr: {fileID: 3909465149495224455}
@@ -254,7 +255,11 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 512
+  plateform:
+    serializedVersion: 2
+    m_Bits: 64
   ennemyDamage: 10
+  ennemyBoxCollider2D: {fileID: 7427327724671907508}
 --- !u!1 &7550433208015121529
 GameObject:
   m_ObjectHideFlags: 0

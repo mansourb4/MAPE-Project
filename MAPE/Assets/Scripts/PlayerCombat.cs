@@ -20,7 +20,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField]
     private bool combatEnabled;
     [SerializeField]
-    private float inputTimer, attack1radius, attack1damage;
+    private float inputTimer, attack1radius, attack1damage, nextAttacktime;
     private bool gotInput , isAttacking;
     private PlayerMovement pm;
     public Enemycombats enemi;
@@ -31,6 +31,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
+        nextAttacktime = Time.time;
         pm = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
         animator.SetBool("canAttack", combatEnabled);
@@ -57,16 +58,16 @@ public class PlayerCombat : MonoBehaviour
     }
     void TakeInput()
     {
-        if (Input.GetKey(KeyCode.F) && combatEnabled)
+        if (Input.GetKey(KeyCode.F) && combatEnabled && (Time.time >= nextAttacktime))
         {
             gotInput = true;
             lastInputTime = Time.time;
-            
-                
-                
-               
-                    
-                    damage = 40;
+            nextAttacktime = Time.time + attackRate;
+
+
+
+
+            damage = 40;
                     Attack();
                     
                 
@@ -75,29 +76,29 @@ public class PlayerCombat : MonoBehaviour
             
         }
         
-        if (Input.GetKey(KeyCode.B) && combatEnabled)
+        if (Input.GetKey(KeyCode.B) && combatEnabled && (Time.time >= nextAttacktime))
         {
             gotInput = true;
             lastInputTime = Time.time;
-            
-            
-                
-                Attack2();
+            nextAttacktime = Time.time + attackRate;
+
+
+            Attack2();
                 
             
 
             
         }
         
-        if (Input.GetKey(KeyCode.V) && combatEnabled)
+        if (Input.GetKey(KeyCode.V) && combatEnabled && (Time.time >= nextAttacktime))
         {
             gotInput = true;
             lastInputTime = Time.time;
-            
-            
-               
-                
-                Special_Attack();
+            nextAttacktime = Time.time + attackRate;
+
+
+
+            Special_Attack();
                
             
             

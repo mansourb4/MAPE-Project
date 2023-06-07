@@ -7,9 +7,9 @@ public class Enemycombats : MonoBehaviour
     [SerializeField]
     private float maxHealth, knockbackspeedX, knockbackSpeedY, knockbackDuration, radius;
     [SerializeField]
-    private bool applyKnockback;
-    private float currentHealth, knockbackStart, distance;
-    public int agroDistance;
+    private bool applyKnockback, isTouchingGround;
+    private float currentHealth, knockbackStart, attackrange;
+    public int agroattackrange;
     private PlayerMovement pc;
     private Rigidbody2D rb;
     [SerializeField]
@@ -21,21 +21,23 @@ public class Enemycombats : MonoBehaviour
     [SerializeField]
     private LayerMask Plateform;
     [SerializeField]
-    private float wallCheckDistance,
+    private float wallCheckattackrange,
                   movementSpeed;
     private float nextAttacktime ;
     public Transform attackpoint, attackpointr,attackpointl;
     // public PlayerHealth ph;
     public float rate;
-    public LayerMask player;
+    public LayerMask player, plateform;
     public int ennemyDamage;
-    private int currentposition;
+    public BoxCollider2D ennemyBoxCollider2D;
+    private float aggrodistance;
     private void Start()
     {
+       
         nextAttacktime = Time.time;
         anim.SetBool("Dead", false);
         anim.SetBool("inRange", false);
-        
+        ennemyBoxCollider2D = GetComponent<BoxCollider2D>();
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -43,8 +45,9 @@ public class Enemycombats : MonoBehaviour
     }
     private void Update()
     {
-        
-        distance = Vector2.Distance(transform.position, pc.transform.position);
+        isTouchingGround = IsTouchingGround();
+        attackrange = Vector2.Distance(transform.position, pc.transform.position);
+        aggrodistance = Vector2.Distance(transform.position, pc.transform.position);
         if (pc.transform.position.x > this.gameObject.transform.position.x)
         {
             playerOnLeft = false;
@@ -56,25 +59,34 @@ public class Enemycombats : MonoBehaviour
 
         }
         CheckKnockback();
-        wallDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, Plateform);
+        wallDetected = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckattackrange, Plateform);
         Flip();
         if (wallDetected)
         {
             Flip();
         }
-        else if (playerOnLeft )
+        if (aggrodistance <= 10f && isTouchingGround)
         {
-            transform.position += Vector3.left * movementSpeed * Time.deltaTime;
+             if (playerOnLeft)
+            {
+                transform.position += Vector3.left * movementSpeed * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += Vector3.right * movementSpeed * Time.deltaTime;
+            }
+            
+
         }
-        else 
+        else
         {
-            transform.position += Vector3.right * movementSpeed * Time.deltaTime;
+            anim.Play("frost_idle_left");
         }
-        
-        
-        
-           
-        
+
+
+
+
+
         pc.GetFacingDirection();
 
         Attack();
@@ -98,8 +110,9 @@ public class Enemycombats : MonoBehaviour
         }
         
        // anim.SetTrigger("damage");
-        if (applyKnockback && currentHealth > 0.0f)
+        if (applyKnockback && currentHealth > 0.0f && isTouchingGround)
         {
+            
             //Knockback
             Knockback();
         }
@@ -108,6 +121,7 @@ public class Enemycombats : MonoBehaviour
             //Die
             Die();
         }
+        
     }
 
     private void Knockback()
@@ -172,10 +186,10 @@ public class Enemycombats : MonoBehaviour
     private void Attack()
     {
         
-        if ((distance <= agroDistance ) && Time.time >= nextAttacktime)
+        if ((attackrange <= agroattackrange ) && (Time.time >= nextAttacktime) && isTouchingGround)
         {
             
-           anim.SetBool("inRange", true);
+            anim.SetBool("inRange", true);
            anim.Play("Frost_Guardian_attacking_left");
            nextAttacktime = Time.time + rate;
             Collider2D playercollider = Physics2D.OverlapCircle(attackpoint.position, radius);
@@ -184,7 +198,7 @@ public class Enemycombats : MonoBehaviour
 
             
         }
-        
+       
         anim.SetBool("inRange", false);
         
     }
@@ -197,7 +211,13 @@ public class Enemycombats : MonoBehaviour
 
     }
 
-    
-        
-    
+    private bool IsTouchingGround()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(ennemyBoxCollider2D.bounds.center, ennemyBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, plateform);
+        return !(raycastHit.collider is null); // return if we collide to something
+    }
+
+
+
+
 }
