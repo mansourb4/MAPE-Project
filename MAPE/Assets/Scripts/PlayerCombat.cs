@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -40,7 +41,12 @@ public class PlayerCombat : MonoBehaviour
 
     void TakeInput()
     {
-        if (Input.GetKey(KeyCode.F))
+        bool isController = false;
+        if (Gamepad.all.Count > 0)
+        {
+            isController = true;
+        }
+        if (Input.GetKey(KeyCode.F) || (isController && Gamepad.all[0].squareButton.wasPressedThisFrame))
         {
             if(Time.time >= _nextAttackTime)
             {
@@ -52,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
             _attackPoint.gameObject.SetActive(false);
         }
         
-        if (Input.GetKey(KeyCode.B))
+        if (Input.GetKey(KeyCode.B) || (isController && Gamepad.all[0].triangleButton.wasPressedThisFrame))
         {
             if(Time.time >= _nextAttackTime)
             {
@@ -64,7 +70,7 @@ public class PlayerCombat : MonoBehaviour
             _attackPoint.gameObject.SetActive(false);
         }
         
-        if (Input.GetKey(KeyCode.V))
+        if (Input.GetKey(KeyCode.V) || (isController && Gamepad.all[0].circleButton.wasPressedThisFrame))
         {
             if(Time.time >= _nextAttackTime)
             {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,18 +41,23 @@ public class PlayerMovement : MonoBehaviour
     private void TakeInput()
     {
         _direction = Vector2.zero;
+        bool isController = false;
+        if (Gamepad.all.Count > 0)
+        {
+            isController = true;
+        }
         
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || (isController && Gamepad.all[0].leftStick.left.isPressed))
         {
             _direction += Vector2.left;
             IsTurnedRight = false;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D)|| (isController && Gamepad.all[0].leftStick.right.isPressed))
         {
             _direction += Vector2.right;
             IsTurnedRight = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && isTouchingGround)
+        if ((Input.GetKeyDown(KeyCode.Space) || (isController && Gamepad.all[0].crossButton.wasPressedThisFrame))&& isTouchingGround)
         {
             playerRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
