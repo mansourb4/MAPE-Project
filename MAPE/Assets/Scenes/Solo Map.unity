@@ -966,7 +966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &563788711
 Transform:
   m_ObjectHideFlags: 0
@@ -989,20 +989,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563788709}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4edcf2b686f914bc385af78b9b75553b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAkomi: {fileID: 0}
-  playerGentaro: {fileID: 0}
-  playerHeira: {fileID: 0}
-  playerKettewen: {fileID: 0}
+  playerAkomi: {fileID: 9102080435200634922, guid: c644c785e2adb4b03b459432cd29fdab, type: 3}
+  playerGentaro: {fileID: 1503875633637141263, guid: e95deadaea61847f4bb034a18be93dc8, type: 3}
+  playerHeira: {fileID: 1588062111256988905, guid: c12fa9463f70345b28104e88bb75de44, type: 3}
+  playerKettewen: {fileID: 1248103457852660602, guid: 9e858d6bb78bb4321af9f5186b810093, type: 3}
   playerName: 
   playerTransform: {fileID: 0}
   maxHealth: 100
-  currentHealth: 0
-  healthBar: {fileID: 0}
+  currentHealth: 100
+  healthBar: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
 --- !u!114 &563788713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,10 +1093,10 @@ MonoBehaviour:
   playerHeira: {fileID: 1588062111256988905, guid: c12fa9463f70345b28104e88bb75de44, type: 3}
   playerKettewen: {fileID: 1248103457852660602, guid: 9e858d6bb78bb4321af9f5186b810093, type: 3}
   playerName: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 9102080435200635345, guid: c644c785e2adb4b03b459432cd29fdab, type: 3}
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1065342220}
 --- !u!114 &676192958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,6 +1370,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1065342220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
+  m_PrefabInstance: {fileID: 711528371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8ae8d291050479d915611fb1afd905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1076891709
 GameObject:
   m_ObjectHideFlags: 0

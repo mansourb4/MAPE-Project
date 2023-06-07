@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 0
   healthBar: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
 --- !u!114 &9102080435200635350
 MonoBehaviour:
