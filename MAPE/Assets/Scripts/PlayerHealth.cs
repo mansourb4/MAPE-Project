@@ -27,8 +27,6 @@ public class PlayerHealth : MonoBehaviour
     
     void Update()
     {
-        
-
         if (instancePlayer.armor)
         {
             maxHealth = 120;
