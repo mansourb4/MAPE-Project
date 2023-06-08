@@ -36,22 +36,22 @@ public class InstantiatePlayer : MonoBehaviour
         switch (playerName)
         {
             case "Akomi":
-                playerAkomi = Instantiate(playerAkomi, new Vector3(83, -37, 0), Quaternion.identity);
+                playerAkomi = Instantiate(playerAkomi, new Vector3(83, -30, 0), Quaternion.identity);
                 playerTransform = playerAkomi.transform;
                 _instantiated = true;
                 break;
             case "Gentaro":
-                playerGentaro = Instantiate(playerGentaro, new Vector3(83, -37, 0), Quaternion.identity);
+                playerGentaro = Instantiate(playerGentaro, new Vector3(83, -30, 0), Quaternion.identity);
                 playerTransform = playerGentaro.transform;
                 _instantiated = true;
                 break;
             case "Heira":
-                playerHeira = Instantiate(playerHeira, new Vector3(83, -37, 0), Quaternion.identity);
+                playerHeira = Instantiate(playerHeira, new Vector3(83, -30, 0), Quaternion.identity);
                 playerTransform = playerHeira.transform;
                 _instantiated = true;
                 break;
             case "Kettewen":
-                playerKettewen = Instantiate(playerKettewen, new Vector3(83, -37, 0), Quaternion.identity);
+                playerKettewen = Instantiate(playerKettewen, new Vector3(83, -30, 0), Quaternion.identity);
                 playerTransform = playerKettewen.transform;
                 _instantiated = true;
                 break;

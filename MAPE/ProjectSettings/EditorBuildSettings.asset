@@ -9,18 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: eb4e469d006b64c5193d29fd1152a082
   - enabled: 0
-    path: Assets/Scenes/Solo Map 2.unity
+    path: 
     guid: 06cac4d0a6c094f29b2098ebd3aa71c7
   - enabled: 1
     path: Assets/Scenes/Solo Map.unity
     guid: 325dc181ee636314abbc0b7b13e416d9
+  - enabled: 1
+    path: Assets/Scenes/Map 1V1.unity
+    guid: 5fadce59a237458498be543c56eae8f5
   - enabled: 0
-    path: Assets/Scenes/Gentaro Map.unity
+    path: 
     guid: fd256b87ee62b4d37862fe43f6f57e64
   - enabled: 0
-    path: Assets/Scenes/Heira Map.unity
+    path: 
     guid: 5b8b45475fbf74a9dbdf244971e3b321
   - enabled: 0
-    path: Assets/Scenes/Kettewen Map.unity
+    path: 
     guid: b5c79ff36deaa7143a5066fcd23ee924
   m_configObjects: {}
