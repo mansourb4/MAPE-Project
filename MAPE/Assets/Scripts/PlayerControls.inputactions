@@ -6,10 +6,10 @@
             "id": "d38b142b-b743-48df-b856-df3e2123c599",
             "actions": [
                 {
-                    "name": "Horizontal Movement",
+                    "name": "Movement",
                     "type": "PassThrough",
-                    "id": "5277a3d1-14ce-44cc-881e-ce0cfaaf1300",
-                    "expectedControlType": "Axis",
+                    "id": "dba301c8-0bec-4935-8764-df43da5c0dab",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -60,80 +60,58 @@
                 },
                 {
                     "name": "",
-                    "id": "1b4001e8-356d-4d74-9e38-9d028787ea6e",
-                    "path": "<DualShockGamepad>/leftStick",
+                    "id": "bf283f33-f9c6-4552-9eb1-c9dbbb096487",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_arrows",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "AD",
-                    "id": "f0fc23b4-717d-408d-ad31-9451602b69ad",
-                    "path": "1DAxis",
+                    "name": "Arrows",
+                    "id": "2cba7344-1912-4ab0-917b-2ec5ffbad345",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Horizontal Movement",
+                    "action": "Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "22487269-d847-4d0d-a443-5f2d95a6ca32",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "f5e073ab-82d5-4d0a-97de-66bbf149b509",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Arrow",
-                    "id": "9dd2e223-a1d4-43cc-9911-e9589a5112d8",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Horizontal Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "95dae1ce-ddf3-4c7e-842a-46f661811823",
+                    "name": "left",
+                    "id": "61de040c-2a05-455a-9750-3d7e1858fec4",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_arrows",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "3c1767a6-ba41-48d8-94cf-0a91600835a6",
+                    "name": "right",
+                    "id": "633be4d6-25be-4100-8a52-a7b3417ceee7",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_arrows",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c2c56aac-da69-460b-afa5-b9cbc3df682c",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -162,6 +140,17 @@
                 {
                     "devicePath": "<DualShockGamepad>",
                     "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard_arrows",
+            "bindingGroup": "Keyboard_arrows",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
                     "isOR": false
                 }
             ]

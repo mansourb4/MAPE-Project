@@ -2989,6 +2989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563788711}
   - component: {fileID: 563788713}
+  - component: {fileID: 563788714}
   m_Layer: 0
   m_Name: Player Manager
   m_TagString: Untagged
@@ -3024,12 +3025,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  jumpSpeed: 30
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0
-  groundLayer:
+  animator: {fileID: 0}
+  jumpForce: 30
+  IsTurnedRight: 1
+  isAttacking: 0
+  playerBoxCollider2D: {fileID: 0}
+  playerRigidbody2D: {fileID: 0}
+  platformLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &563788714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563788709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: -1
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 1503875633637141263, guid: e95deadaea61847f4bb034a18be93dc8, type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &571646995
 GameObject:
   m_ObjectHideFlags: 0

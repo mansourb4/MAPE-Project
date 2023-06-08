@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask platformLayerMask;
     public LayerMask enemyLayerMask;
     public static InstantiatePlayer instancePlayer;
+    
     private void Start()
     {
         instancePlayer = InstantiatePlayer.Instance;
@@ -29,28 +30,17 @@ public class PlayerMovement : MonoBehaviour
         {
             return animator.GetBool("canMove");
         }
-            
     }
     
-    
-
     // Update is called once per frame
-   
     void Update()
     {
-        
         isTouchingGround = IsTouchingGround();
         TakeInput();
-        
-            Move();
-        
-       
+        Move();
         animator.SetBool("Is_Jumping", !isTouchingGround);
         animator.SetFloat("Vertical_speed", playerRigidbody2D.velocity.y);
-        
-        
-            Move();
-        
+        Move();
     }
     public int GetFacingDirection()
     {
@@ -58,15 +48,8 @@ public class PlayerMovement : MonoBehaviour
         {
             return 0;
         }
-        else
-        {
-            return 1;
-        }
 
-        if (instancePlayer.boots)
-        {
-            speed = 7;
-        }
+        return 1;
     }
     private void Move()
     {
