@@ -41,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Is_Jumping", !isTouchingGround);
         animator.SetFloat("Vertical_speed", playerRigidbody2D.velocity.y);
         Move();
+        if (instancePlayer.boots)
+        {
+            speed = 8;
+        }
     }
     public int GetFacingDirection()
     {

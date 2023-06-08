@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
         maxHealth = InstantiatePlayer.Instance.maxHealth;
         currentHealth = InstantiatePlayer.Instance.currentHealth;
         healthBar = InstantiatePlayer.Instance.healthBar;
-            
+
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
