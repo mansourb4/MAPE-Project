@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D playerBoxCollider2D;
     public Rigidbody2D playerRigidbody2D;
     public LayerMask platformLayerMask;
+    public LayerMask enemyLayerMask;
+    public static InstantiatePlayer instancePlayer;
+    private void Start()
+    {
+        instancePlayer = InstantiatePlayer.Instance;
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
         if(animator.GetBool("canMove"))
         {
             Move();
+        }
+
+        if (instancePlayer.boots)
+        {
+            speed = 7;
         }
     }
 
@@ -57,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             _direction += Vector2.right;
             IsTurnedRight = true;
         }
-        if ((Input.GetKeyDown(KeyCode.Space) || (isController && Gamepad.all[0].crossButton.wasPressedThisFrame))&& isTouchingGround)
+        if ((Input.GetKeyDown(KeyCode.Space) || (isController && Gamepad.all[0].circleButton.wasPressedThisFrame)) && isTouchingGround)
         {
             playerRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -81,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsTouchingGround()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(playerBoxCollider2D.bounds.center, playerBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, platformLayerMask);
-        return !(raycastHit.collider is null); // return if we collide to something
+        RaycastHit2D raycastHitEnemy = Physics2D.BoxCast(playerBoxCollider2D.bounds.center, playerBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, enemyLayerMask);
+        return !(raycastHit.collider == raycastHitEnemy.collider && raycastHit.collider is null); // return if we collide to something
     }
 }

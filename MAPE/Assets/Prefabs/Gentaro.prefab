@@ -352,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  instancePlayer: {fileID: 0}
   healthBar: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
 --- !u!114 &1503875633637141496
 MonoBehaviour:
@@ -458,3 +459,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6912184719983648495, guid: cd9278ae88056f646849f2aae4a0aac4, type: 3}
   m_PrefabInstance: {fileID: 2650652606266471837}
   m_PrefabAsset: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 128

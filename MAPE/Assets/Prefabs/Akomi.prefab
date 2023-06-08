@@ -249,6 +249,18 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   healthBar: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
+  speed: 5
+  animator: {fileID: 9102080435200634927}
+  jumpForce: 30
+  isAttacking: 0
+  playerBoxCollider2D: {fileID: 9102080435200635349}
+  playerRigidbody2D: {fileID: 9102080435200635344}
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &9102080435200635350
 MonoBehaviour:
   m_ObjectHideFlags: 0

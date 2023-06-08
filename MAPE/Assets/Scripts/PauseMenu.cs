@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
         {
             isController = true;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || (isController && Gamepad.all[0].startButton.wasPressedThisFrame))
         {
             if (GameIsPaused)
             {
