@@ -23,7 +23,17 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         direction = Vector2.zero;
     }
-
+    public int GetFacingDirection()
+    {
+        if (IsTurnedRight)
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -44,7 +54,7 @@ public class PlayerController : MonoBehaviour
     void TakeInput()
     {
         direction = Vector2.zero;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) )
         {
             direction += Vector2.up;
         }

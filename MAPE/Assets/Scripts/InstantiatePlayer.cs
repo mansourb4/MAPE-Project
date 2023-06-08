@@ -60,6 +60,13 @@ public class InstantiatePlayer : MonoBehaviour
         }
 
         healthBar.SetMaxHealth(maxHealth);
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemies");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemycombats>().FindPlayer();
+           
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +75,8 @@ public class InstantiatePlayer : MonoBehaviour
         if (!_instantiated)
         {
             Start();
+
         }
+        
     }
 }

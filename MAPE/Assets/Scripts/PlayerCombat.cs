@@ -10,88 +10,137 @@ public class PlayerCombat : MonoBehaviour
 {
     public Animator animator;
 
-    private Transform _attackPoint;
-    public Transform attackPointRight;
-    public Transform attackPointLeft;
-    
+   
     public float attackRange = 0.5f;
     public float attackRate = 1f;
-    private float _nextAttackTime = 0f;
+    private float lastInputTime = Mathf.NegativeInfinity;
     public LayerMask enemyLayers;
-    public int damage = 0;
-    private bool _isTurnedRight = true;
+    private int damage = 0;
+    
 
     public bool canMove = true;
-    public InstantiatePlayer instancePlayer;
+    [SerializeField]
+    private bool combatEnabled;
+    [SerializeField]
+    private float inputTimer, attack1radius, attack1damage, nextAttacktime;
+    private bool gotInput , isAttacking;
+    private PlayerMovement pm;
+    public Enemycombats enemi;
+    public Transform[] attackposition; 
+    private int currentposition;
+    public float cooldownattack1, cooldownattack2, cooldownattack3;
+
 
     private void Start()
     {
-        instancePlayer = InstantiatePlayer.Instance;
+        nextAttacktime = Time.time;
+        pm = GetComponent<PlayerMovement>();
+        animator = GetComponent<Animator>();
+        animator.SetBool("canAttack", combatEnabled);
     }
 
     void Update()
     {
-        _isTurnedRight = animator.GetBool("Right");
+        pm.IsTurnedRight = animator.GetBool("Right");
         TakeInput();
+        CheckAttacks();
 
-        switch (_isTurnedRight)
+        Updatedposition();
+    }
+    private void Updatedposition()
+    {
+        if (pm.IsTurnedRight)
         {
-            case true:
-                _attackPoint = attackPointRight;
-                break;
-            default:
-                _attackPoint = attackPointLeft;
-                break;
+            currentposition = 1;
+        }
+        else
+        {
+            currentposition = 0;
         }
     }
-
     void TakeInput()
     {
-        bool isController = false;
-        if (Gamepad.all.Count > 0)
+        if (Time.time - lastInputTime < cooldownattack1)
         {
-            isController = true;
+            return;
         }
-        if (Input.GetKey(KeyCode.F) || (isController && Gamepad.all[0].squareButton.wasPressedThisFrame))
-        {
-            if(Time.time >= _nextAttackTime)
+            if (Input.GetKey(KeyCode.F) && combatEnabled && (Time.time >= nextAttacktime))
             {
-                _attackPoint.gameObject.SetActive(true);
-                damage = 40 + 10 * instancePlayer.nbAttackPotion;
+                gotInput = true;
+                lastInputTime = Time.time;
+                nextAttacktime = Time.time + attackRate;
+
+
+
+                damage = 20;
                 Attack();
-                _nextAttackTime = Time.time + 1f / attackRate;
-            }
-            _attackPoint.gameObject.SetActive(false);
+
+
+
+            
+      
         }
-        
-        if (Input.GetKey(KeyCode.B) || (isController && Gamepad.all[0].triangleButton.wasPressedThisFrame))
+
+        if (Time.time - lastInputTime < cooldownattack2)
         {
-            if(Time.time >= _nextAttackTime)
+            return;
+        }
+            if (Input.GetKey(KeyCode.B) && combatEnabled && (Time.time >= nextAttacktime))
             {
-                _attackPoint.gameObject.SetActive(true);
-                damage = 35 + 10 * instancePlayer.nbAttackPotion;
+                gotInput = true;
+                lastInputTime = Time.time;
+                nextAttacktime = Time.time + attackRate;
+
+                damage = 40;
                 Attack2();
-                _nextAttackTime = Time.time + 1f / attackRate;
-            }
-            _attackPoint.gameObject.SetActive(false);
+
+
+
+
+            
         }
-        
-        if (Input.GetKey(KeyCode.V) || (isController && Gamepad.all[0].circleButton.wasPressedThisFrame))
+
+        if (Time.time - lastInputTime < cooldownattack3)
         {
-            if(Time.time >= _nextAttackTime)
+            return;
+        }
+            if (Input.GetKey(KeyCode.V) && combatEnabled && (Time.time >= nextAttacktime))
             {
-                _attackPoint.gameObject.SetActive(true);
-                damage = 80 + 10 * instancePlayer.nbAttackPotion;
+                gotInput = true;
+                lastInputTime = Time.time;
+                nextAttacktime = Time.time + attackRate;
+
+                damage = 60;
+
                 Special_Attack();
-                _nextAttackTime = Time.time + 1f / attackRate;
+
+
+
+            
+        }
+            
+    }
+
+    private void CheckAttacks()
+    {
+        if (gotInput)
+        {
+            if (!isAttacking)
+            {
+                gotInput = false;
+                isAttacking = true;
+                animator.SetBool("isAttacking",isAttacking);
             }
-            _attackPoint.gameObject.SetActive(false);
+        }
+        if(Time.time >= lastInputTime + inputTimer)
+        {
+            gotInput = false;
         }
     }
 
     void Attack()
     {
-        if (_isTurnedRight)
+        if (pm.IsTurnedRight)
         {
             animator.SetTrigger("Attack_1_right");
         }
@@ -101,18 +150,13 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Attack_1_left");
         }
         
-        /*
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPointLeft.position, attackRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Gentaro a attaqué " + enemy.name);
-        }
-        */
+        
+       
     }
     
     void Attack2()
     {
-        if (_isTurnedRight)
+        if (pm.IsTurnedRight)
         {
             animator.SetTrigger("Attack_2_right");
         }
@@ -121,10 +165,31 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Attack_2_left");
         }
     }
+    private void CheckAttackHitbox()
+    {
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackposition[currentposition].position,attack1radius,enemyLayers) ;
+        foreach (Collider2D collider in detectedObjects)
+        {
+
+            Debug.Log("hit");
+            collider.gameObject.GetComponent<Enemycombats>().Damage(damage);
+            
+
+        }
+
+    }
+     
+    
+
+    private void FinishAttack()
+    {
+        isAttacking = false;
+        animator.SetBool("isAttacking",isAttacking);
+    }
 
     void Special_Attack()
     {
-        if (_isTurnedRight)
+        if (pm.IsTurnedRight)
         {
             animator.SetTrigger("Spe_right");
         }
@@ -132,5 +197,11 @@ public class PlayerCombat : MonoBehaviour
         {
             animator.SetTrigger("Spe_left");
         }    
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackposition[currentposition].position, attack1radius);
+        
     }
 }
