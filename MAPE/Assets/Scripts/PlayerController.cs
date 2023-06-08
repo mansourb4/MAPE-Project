@@ -1,71 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    private Vector2 direction;
-    private Animator animator;
-    public float jumpSpeed = 30f; 
+    private Vector2 _direction = Vector2.zero;
+    public Animator animator;
+    public float jumpForce = 30f;
     private Rigidbody2D player;
-    public Transform groundCheck;
-    public float groundCheckRadius;
-    public LayerMask groundLayer;
     private bool isTouchingGround;
-
     private bool IsTurnedRight = true;
+    public bool isAttacking = false;
+    public BoxCollider2D playerBoxCollider2D;
+    public Rigidbody2D playerRigidbody2D;
+    public LayerMask platformLayerMask;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        direction = Vector2.zero;
-    }
+    private Vector2 moveValue;
 
     // Update is called once per frame
     void Update()
     {
-        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        TakeInput();
-        Move();
-        if(Input.GetButtonDown("Jump") && isTouchingGround)
+        isTouchingGround = IsTouchingGround();
+        animator.SetBool("Is_Jumping", !isTouchingGround);
+        animator.SetFloat("Vertical_speed", playerRigidbody2D.velocity.y);
+        
+        if (animator.GetBool("canMove"))
         {
-            float force = jumpSpeed;
-            if(player.velocity.y < 0)
-            {
-                force -= player.velocity.y;
-            }
-            player.velocity = new Vector2(player.velocity.x, player.velocity.y + (force + 0.5f * Time.fixedDeltaTime)/ player.mass);
+            transform.Translate(moveValue);
         }
-    }
-
-    void TakeInput()
-    {
-        direction = Vector2.zero;
-        if (Input.GetKey(KeyCode.Space))
+        
+        if (moveValue.x < 0)
         {
-            direction += Vector2.up;
-        }
-            
-        if (Input.GetKey(KeyCode.Q))
-        {
-            direction += Vector2.left;
             IsTurnedRight = false;
-                
         }
-        if (Input.GetKey(KeyCode.D))
+
+        else
         {
-            direction += Vector2.right;
             IsTurnedRight = true;
         }
     }
 
-    public void Move()
+    private void Move(InputAction.CallbackContext context)
     {
-        transform.Translate(direction * (speed * Time.deltaTime));
-        SetAnimatorMovement(direction);
+        moveValue = context.ReadValue<Vector2>() * (Time.deltaTime * speed);
+        SetAnimatorMovement(moveValue);
+    }
+
+    public void Jump()
+    {
+        if (isTouchingGround)
+        {
+            playerRigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     void SetAnimatorMovement(Vector2 direction)
@@ -81,5 +69,11 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat("Speed", 0);
         }
+    }
+    
+    private bool IsTouchingGround()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerBoxCollider2D.bounds.center, playerBoxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, platformLayerMask);
+        return !(raycastHit.collider is null); // return if we collide to something
     }
 }

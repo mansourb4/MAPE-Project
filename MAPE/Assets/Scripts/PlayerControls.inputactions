@@ -3,13 +3,13 @@
     "maps": [
         {
             "name": "Player",
-            "id": "d38b142b-b743-48df-b856-df3e2123c599",
+            "id": "0541868a-9f45-46cd-890b-f060b11f364a",
             "actions": [
                 {
-                    "name": "Horizontal Movement",
+                    "name": "Movement",
                     "type": "PassThrough",
-                    "id": "5277a3d1-14ce-44cc-881e-ce0cfaaf1300",
-                    "expectedControlType": "Axis",
+                    "id": "0222c1fc-bdb9-4970-bc3f-8df36d5709b6",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -17,28 +17,39 @@
                 {
                     "name": "Jump",
                     "type": "Button",
-                    "id": "edbc9f68-b28b-431e-a96e-d720c1fdd5b0",
+                    "id": "7b0f58a8-d34c-432c-926b-e5303dd6d318",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "209de3b8-10ce-4884-9d0c-0eeec2b21401",
+                    "id": "e343cb14-6dc6-4234-a284-0317b8649eef",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
+                    "groups": "Keyboard_1",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d69a1288-4066-4c3c-a900-396ae0da954c",
+                    "id": "b83eac8d-eb0c-413a-8702-af986ce26d93",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard_2",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c76935c5-dee5-46ff-aea9-d96977c8fa72",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -48,92 +59,81 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "6889c507-3445-4c9c-b050-d7fbcfdba21a",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1b4001e8-356d-4d74-9e38-9d028787ea6e",
-                    "path": "<DualShockGamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Horizontal Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "AD",
-                    "id": "f0fc23b4-717d-408d-ad31-9451602b69ad",
-                    "path": "1DAxis",
+                    "name": "WASD",
+                    "id": "53d375ab-d533-4d7e-be14-cd0068cccf13",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Horizontal Movement",
+                    "action": "Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "22487269-d847-4d0d-a443-5f2d95a6ca32",
+                    "name": "left",
+                    "id": "f0623203-6cc3-48d3-b73c-d357a34cf332",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_1",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "f5e073ab-82d5-4d0a-97de-66bbf149b509",
+                    "name": "right",
+                    "id": "09ba8f02-f178-4635-a165-c7c7b4ed4d03",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_1",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Arrow",
-                    "id": "9dd2e223-a1d4-43cc-9911-e9589a5112d8",
-                    "path": "1DAxis",
+                    "name": "Arrows",
+                    "id": "068d7c20-1ecd-4fb6-88c2-f3cccd8c70e7",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Horizontal Movement",
+                    "action": "Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "95dae1ce-ddf3-4c7e-842a-46f661811823",
+                    "name": "left",
+                    "id": "7398836e-1c3d-447d-a414-27e7a6af409c",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_2",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "3c1767a6-ba41-48d8-94cf-0a91600835a6",
+                    "name": "right",
+                    "id": "b0f3032c-873f-4bf3-81a2-21713e214050",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Horizontal Movement",
+                    "groups": "Keyboard_2",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "90cac895-a3e8-46eb-ad5b-fa9dc22893f1",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -156,11 +156,33 @@
             ]
         },
         {
+            "name": "Keyboard_1",
+            "bindingGroup": "Keyboard_1",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard_2",
+            "bindingGroup": "Keyboard_2",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
             "name": "Controller",
             "bindingGroup": "Controller",
             "devices": [
                 {
-                    "devicePath": "<DualShockGamepad>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": true,
                     "isOR": false
                 }

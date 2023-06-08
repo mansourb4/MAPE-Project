@@ -593,7 +593,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: db633daf0852d483c9a366cbf298b0ad, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.183
   m_Pitch: 0.5
   Loop: 1
   Mute: 0
@@ -732,20 +732,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563788709}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4edcf2b686f914bc385af78b9b75553b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAkomi: {fileID: 0}
-  playerGentaro: {fileID: 0}
-  playerHeira: {fileID: 0}
-  playerKettewen: {fileID: 0}
+  playerAkomi: {fileID: 9102080435200634922, guid: c644c785e2adb4b03b459432cd29fdab, type: 3}
+  playerGentaro: {fileID: 1503875633637141263, guid: e95deadaea61847f4bb034a18be93dc8, type: 3}
+  playerHeira: {fileID: 1588062111256988905, guid: c12fa9463f70345b28104e88bb75de44, type: 3}
+  playerKettewen: {fileID: 1248103457852660602, guid: 9e858d6bb78bb4321af9f5186b810093, type: 3}
   playerName: 
   playerTransform: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 4529923335930812509, guid: bab3f35e921d94433bb92a834f9ea7c0, type: 3}
 --- !u!114 &563788713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,16 +755,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 563788709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370768e0c20b64d58bb37d9c4dac9d72, type: 3}
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  jumpSpeed: 30
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0
-  groundLayer:
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: -1
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Join
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: cc8953b8-c054-4b41-a4cd-167115fa3c62
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 9d92ab8b-4797-484d-bf47-6f09373ca6d4
+        m_Path: <Keyboard>/enter
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 8a951105-8c5c-40bb-afc2-4a7b50ead4f0
+        m_Path: <Gamepad>/buttonSouth
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PlayerPrefab: {fileID: 9102080435200634922, guid: c644c785e2adb4b03b459432cd29fdab, type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
     serializedVersion: 2
-    m_Bits: 0
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1001 &711528371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1621,7 +1662,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.7557297
+  orthographic size: 6.8521814
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1659,7 +1700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984753503}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 823c05ab7b137df48a5b0cdc8d17d106, type: 3}
   m_Name: 
@@ -1949,6 +1990,10 @@ PrefabInstance:
     - target: {fileID: 2370783760507083613, guid: ad2b431965fe8b74395854a5c5a23113, type: 3}
       propertyPath: m_RootOrder
       value: 1333
+      objectReference: {fileID: 0}
+    - target: {fileID: 2433882469742176590, guid: ad2b431965fe8b74395854a5c5a23113, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2775297002383027354, guid: ad2b431965fe8b74395854a5c5a23113, type: 3}
       propertyPath: m_LocalScale.x
