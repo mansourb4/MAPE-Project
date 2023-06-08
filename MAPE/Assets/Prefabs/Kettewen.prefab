@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248103456994117505}
   m_LocalRotation: {x: -0, y: 0.99984455, z: -0, w: 0.017632557}
-  m_LocalPosition: {x: 0.001, y: -0.452, z: -0.03}
+  m_LocalPosition: {x: -0.512, y: -0.303, z: -0.049}
   m_LocalScale: {x: 0.6125, y: 0.375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -328,8 +328,8 @@ MonoBehaviour:
   nextAttacktime: 0
   enemi: {fileID: 6399632633193781564, guid: 645bf56d494c84f1e8bdc5576dfd724f, type: 3}
   attackposition:
-  - {fileID: 1248103457966232496}
   - {fileID: 1248103456994117510}
+  - {fileID: 1248103457966232496}
   cooldownattack1: 1
   cooldownattack2: 5
   cooldownattack3: 15
@@ -379,7 +379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248103457966232499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.076, y: -0.425, z: 0}
+  m_LocalPosition: {x: 0.294, y: -0.425, z: 0}
   m_LocalScale: {x: 0.6125, y: 0.375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
